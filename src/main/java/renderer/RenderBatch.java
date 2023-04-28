@@ -155,12 +155,14 @@ public class RenderBatch {
         //add vertices with appropriate properties
         // *   *
         // *   *
+        float modifier = (float) sprite.getSprite().getHeight()/sprite.getSprite().getWidth();
+        System.out.println(modifier);
         float xAdd = 1.0f;
-        float yAdd = 1.0f;
+        float yAdd = modifier;
         for (int i = 0; i < 4; i++) {
             if (i == 1) yAdd = 0.0f;
             else if (i == 2) xAdd = 0.0f;
-            else if (i == 3) yAdd = 1.0f;
+            else if (i == 3) yAdd = modifier;
 
             //Load  position
             vertices[offset] = sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x);
@@ -214,5 +216,12 @@ public class RenderBatch {
         return this.hasRoom;
     }
 
+    public boolean hasTextureRoom() {
+        return this.textures.size() < 8;
+    }
+
+    public boolean hasTexture(Texture tex) {
+        return this.textures.contains(tex);
+    }
 
 }
