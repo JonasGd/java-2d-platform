@@ -54,7 +54,6 @@ public class LevelEditorScene extends Scene {
             if (spriteIndex > 14) {
                 spriteIndex = 5;
             }
-            System.out.println(spriteIndex);
             obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
         }
 

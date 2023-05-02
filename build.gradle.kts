@@ -20,6 +20,7 @@ tasks.test {
 val lwjglVersion = "3.2.3"
 val jomlVersion = "1.10.5"
 val lwjglNatives = "natives-windows"
+val imguiVersion = "1.86.10"
 
 dependencies {
     implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
@@ -31,6 +32,11 @@ dependencies {
     implementation("org.lwjgl", "lwjgl-openal")
     implementation("org.lwjgl", "lwjgl-opengl")
     implementation("org.lwjgl", "lwjgl-stb")
+
+    implementation("io.github.spair", "imgui-java-app", imguiVersion)
+    implementation("io.github.spair", "imgui-java-lwjgl3", imguiVersion)
+    implementation("io.github.spair", "imgui-java-natives-windows", imguiVersion)
+
     runtimeOnly("org.lwjgl", "lwjgl", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-assimp", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = lwjglNatives)
