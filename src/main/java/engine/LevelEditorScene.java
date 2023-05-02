@@ -1,5 +1,7 @@
 package engine;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
@@ -27,13 +29,25 @@ public class LevelEditorScene extends Scene {
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(100,100), new Vector2f(256,256)),2);
-        obj1.addComponent(new SpriteRenderer(sprites.getSprite(5)));
+        SpriteRenderer obj1Sprite = new SpriteRenderer();
+        obj1Sprite.setSprite(sprites.getSprites().get(5));
+        obj1.addComponent(obj1Sprite);
         this.addGameObjectToScene(obj1);
         this.activeGameObject = obj1;
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100), new Vector2f(256,256)), -1);
-        obj2.addComponent(new SpriteRenderer(sprites.getSprite(1)));
+        SpriteRenderer obj2Sprite = new SpriteRenderer();
+        obj2Sprite.setSprite(sprites.getSprites().get(1));
+        obj2.addComponent(obj2Sprite);
         this.addGameObjectToScene(obj2);
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+        String serialized = gson.toJson(obj2Sprite);
+        System.out.println(serialized);
+        GameObject obj = gson.fromJson(serialized, GameObject.class);
+        System.out.println(obj);
     }
 
     private void loadResources(){
@@ -56,7 +70,7 @@ public class LevelEditorScene extends Scene {
             if (spriteIndex > 14) {
                 spriteIndex = 5;
             }
-            obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprite(spriteIndex));
+            obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprites().get((spriteIndex)));
         }
 
         for (GameObject go : this.gameObjects) {

@@ -23,8 +23,10 @@ val lwjglNatives = "natives-windows"
 val imguiVersion = "1.86.10"
 
 dependencies {
+    //Include all available natives, but it's likely that you want something specific
     implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
 
+    // LWJGL stuff
     implementation("org.lwjgl", "lwjgl")
     implementation("org.lwjgl", "lwjgl-assimp")
     implementation("org.lwjgl", "lwjgl-glfw")
@@ -33,10 +35,6 @@ dependencies {
     implementation("org.lwjgl", "lwjgl-opengl")
     implementation("org.lwjgl", "lwjgl-stb")
 
-    implementation("io.github.spair", "imgui-java-app", imguiVersion)
-    implementation("io.github.spair", "imgui-java-lwjgl3", imguiVersion)
-    implementation("io.github.spair", "imgui-java-natives-windows", imguiVersion)
-
     runtimeOnly("org.lwjgl", "lwjgl", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-assimp", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = lwjglNatives)
@@ -44,5 +42,21 @@ dependencies {
     runtimeOnly("org.lwjgl", "lwjgl-openal", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-opengl", classifier = lwjglNatives)
     runtimeOnly("org.lwjgl", "lwjgl-stb", classifier = lwjglNatives)
+
     implementation("org.joml", "joml", jomlVersion)
+
+
+    //ImGUI stuff
+    implementation("io.github.spair", "imgui-java-app", imguiVersion)
+    implementation("io.github.spair", "imgui-java-lwjgl3", imguiVersion)
+    implementation("io.github.spair", "imgui-java-natives-windows", imguiVersion)
+
+    //GSON
+    implementation("com.google.code.gson", "gson", "2.8.6")
+
+    //lombok
+    compileOnly("org.projectlombok", "lombok", "1.18.26")
+    annotationProcessor("org.projectlombok", "lombok", "1.18.26")
+    testCompileOnly("org.projectlombok", "lombok", "1.18.26")
+    testAnnotationProcessor("org.projectlombok", "lombok", "1.18.26")
 }
