@@ -1,5 +1,7 @@
 package engine;
 
+import imgui.ImFontAtlas;
+import imgui.ImFontConfig;
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.callback.ImStrConsumer;
@@ -32,7 +34,7 @@ public class ImGuiLayer {
         //Initialize ImGuiIO config
         final ImGuiIO io = ImGui.getIO();
 
-        io.setIniFilename(null); // we don't want to save .ini file
+        io.setIniFilename("imgui.ini"); // save configuration of windows
         io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard); // navigation with keyboard
         io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors); // mouse cursors to display while resizing
         io.setBackendPlatformName("imgui_java_impl_glfw");
@@ -138,39 +140,21 @@ public class ImGuiLayer {
             }
         });
 
-        /*
+
         //--------------------------------------------------------------
         // Fonts configuration
         // read: https://raw.githubusercontent.com/ocornut/imgui/master/docs/Fonts.txt
 
         final ImFontAtlas fontAtlas = io.getFonts();
-        final ImFontConfig fontConfig = new ImFontConfig(); //natively allocated object
+        final ImFontConfig fontConfig = new ImFontConfig(); //natively allocated object, should be explicitly destroyed
 
         //Glyphs could be added per-font as well as per config used globally like here
-        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesCyrillic());
-
-        //add a default font, which is 'ProggyClean.ttf, 13px'
-        fontAtlas.addFontDefault();
+        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
 
         //Fonts merge example
-        fontConfig.setMergeMode(true); // when enabled, all fonts added with this config would be merged
         fontConfig.setPixelSnapH(true);
+        fontAtlas.addFontFromFileTTF("assets/fonts/segoeui.ttf", 22, fontConfig);
 
-        fontAtlas.addFontFromMemoryTTF(loadFromResources("basis33.ttf"), 16, fontConfig);
-
-        fontConfig.setMergeMode(false);
-        fontConfig.setPixelSnapH(false);
-
-        //Fonts from file/memory example
-        // We can add new fonts from the file system
-        fontAtlas.addFontFromFileTTF("src/test/resources/Righteous-Regular.ttf", 14,fontConfig);
-        fontAtlas.addFontFromFileTTF("src/test/resources/Righteous-Regular.ttf", 16,fontConfig);
-
-        //Or directly from the memory
-        fontConfig.setName("Roboto-Regular.ttf, 14px"); // This name will be displayed in Style Editor
-        fontAtlas.addFontFromFileTTF(loadFromResources("Roboto-Regular.ttf"), 14, fontConfig);
-        fontConfig.setName("Roboto-Regular.ttf, 16px"); // We can apply a new config value every time
-        fontAtlas.addFontFromFileTTF(loadFromResources("Roboto-Regular.ttf"), 16, fontConfig);
 
         fontConfig.destroy(); // After all fonts were added we don't need this config anymore
 
@@ -178,18 +162,19 @@ public class ImGuiLayer {
         //Use freetype instead of stb truetype to build a fonts texture
 
 
-        */
+
         //Method initializes LWJGL3 renderer
         //This method SHOULD be called after you've initialized your ImGui configuration
         //ImGui context should be created as well
         imGuiGl3.init("#version 330 core");
     }
 
-    public void update(float dt) {
+    public void update(float dt, Scene currentScene) {
         startFrame(dt);
 
         //Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
+        currentScene.sceneImgui();
         ImGui.showDemoWindow();
         ImGui.render();
 
