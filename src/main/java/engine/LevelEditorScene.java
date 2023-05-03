@@ -2,14 +2,11 @@ package engine;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
 import imgui.ImGui;
 import org.joml.Vector2f;
 import util.AssetPool;
-
-import static org.lwjgl.glfw.GLFW.*;
 
 public class LevelEditorScene extends Scene {
 
@@ -23,8 +20,10 @@ public class LevelEditorScene extends Scene {
     @Override
     public void init() {
         loadResources();
-
         this.camera = new Camera(new Vector2f(-250, 0));
+        if(levelLoaded) {
+            return;
+        }
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
@@ -33,21 +32,13 @@ public class LevelEditorScene extends Scene {
         obj1Sprite.setSprite(sprites.getSprites().get(5));
         obj1.addComponent(obj1Sprite);
         this.addGameObjectToScene(obj1);
-        this.activeGameObject = obj1;
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100), new Vector2f(256,256)), -1);
         SpriteRenderer obj2Sprite = new SpriteRenderer();
         obj2Sprite.setSprite(sprites.getSprites().get(1));
         obj2.addComponent(obj2Sprite);
         this.addGameObjectToScene(obj2);
-
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-        String serialized = gson.toJson(obj2Sprite);
-        System.out.println(serialized);
-        GameObject obj = gson.fromJson(serialized, GameObject.class);
-        System.out.println(obj);
+        this.activeGameObject = obj2;
     }
 
     private void loadResources(){

@@ -16,7 +16,6 @@ public class Window {
     private ImGuiLayer imGuiLayer;
 
     public float r, g, b, a;
-    private boolean fadeToBlack = false;
 
     private static Scene currentScene = null;
 
@@ -132,6 +131,8 @@ public class Window {
         float endTime;
         float dt = -1.0f;
 
+        currentScene.load();
+
         while(!glfwWindowShouldClose(glfwWindow)) {
             //Poll events
             glfwPollEvents();
@@ -148,6 +149,8 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+
+        currentScene.saveExit();
     }
 
     public static int getWidth() {
