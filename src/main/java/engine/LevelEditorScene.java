@@ -1,7 +1,6 @@
 package engine;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import components.Rigidbody;
 import components.SpriteRenderer;
 import components.Spritesheet;
 import imgui.ImGui;
@@ -22,6 +21,7 @@ public class LevelEditorScene extends Scene {
         loadResources();
         this.camera = new Camera(new Vector2f(-250, 0));
         if(levelLoaded) {
+            this.activeGameObject = gameObjects.get(1);
             return;
         }
 
@@ -37,8 +37,8 @@ public class LevelEditorScene extends Scene {
         SpriteRenderer obj2Sprite = new SpriteRenderer();
         obj2Sprite.setSprite(sprites.getSprites().get(1));
         obj2.addComponent(obj2Sprite);
+        obj2.addComponent(new Rigidbody());
         this.addGameObjectToScene(obj2);
-        this.activeGameObject = obj2;
     }
 
     private void loadResources(){
@@ -52,8 +52,10 @@ public class LevelEditorScene extends Scene {
     private int spriteIndex = 5;
     private float spriteFlipTime = 0.1f;
     private float spriteFlipTimeLeft = 0.0f;
+
     @Override
     public void update(float dt) {
+        /*
         spriteFlipTimeLeft -= dt;
         if (spriteFlipTimeLeft <= 0) {
             spriteFlipTimeLeft = spriteFlipTime;
@@ -63,7 +65,7 @@ public class LevelEditorScene extends Scene {
             }
             obj1.getComponent(SpriteRenderer.class).setSprite(sprites.getSprites().get((spriteIndex)));
         }
-
+*/
         for (GameObject go : this.gameObjects) {
             go.update(dt);
         }
