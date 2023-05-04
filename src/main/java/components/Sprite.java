@@ -15,28 +15,10 @@ public class Sprite {
             new Vector2f(0,0),
             new Vector2f(0,1)
     };
-    private int height = 1, width = 1;
+    private float height = 1.0f, width = 1.0f;
 
-//    public Sprite(Texture texture) {
-//        this.texture = texture;
-//        Vector2f[] texCoords = {
-//                new Vector2f(1,1),
-//                new Vector2f(1,0),
-//                new Vector2f(0,0),
-//                new Vector2f(0,1)
-//        };
-//        this.texCoords = texCoords;
-//    }
-//
-//    public Sprite(Texture texture, Vector2f[] texCoords) {
-//        this.texture = texture;
-//        this.texCoords = texCoords;
-//    }
-//
-//    public Sprite(Texture texture, Vector2f[] texCoords, int height, int width) {
-//        this.texture = texture;
-//        this.texCoords = texCoords;
-//        this.height = height;
-//        this.width = width;
-//    }
+    public int getTexId() {
+        return texture == null ? -1 : texture.getTexID();
+    }
+
 }

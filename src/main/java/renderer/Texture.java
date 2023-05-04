@@ -1,5 +1,6 @@
 package renderer;
 
+import lombok.Getter;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
@@ -10,12 +11,9 @@ import static org.lwjgl.stb.STBImage.*;
 
 public class Texture {
     private String filepath;
+    @Getter
     private int texID;
     private int height, width;
-
-//    public Texture(String filepath) {
-//
-//    }
 
     public void init(String filepath) {
         this.filepath = filepath;
