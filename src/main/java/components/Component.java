@@ -1,6 +1,8 @@
-package engine;
+package components;
 
+import engine.GameObject;
 import imgui.ImGui;
+import lombok.Getter;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -8,6 +10,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public abstract class Component {
+
+    private static int ID_COUNTER = 0;
+    @Getter
+    private int uid = -1;
 
     public transient GameObject gameObject = null;
 
@@ -67,5 +73,15 @@ public abstract class Component {
         } catch(IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public void generateId(){
+        if (this.uid == -1) {
+            this.uid = ID_COUNTER++;
+        }
+    }
+
+    public static void init(int maxId) {
+        ID_COUNTER = maxId;
     }
 }
