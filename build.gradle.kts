@@ -23,6 +23,9 @@ val lwjglNatives = "natives-windows"
 val imguiVersion = "1.86.10"
 
 dependencies {
+    //jUnit
+    testImplementation("junit", "junit", "4.13")
+
     //Include all available natives, but it's likely that you want something specific
     implementation(platform("org.lwjgl:lwjgl-bom:$lwjglVersion"))
 
