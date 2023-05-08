@@ -8,12 +8,16 @@ import engine.Transform;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+import renderer.DebugDraw;
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
 
     private GameObject obj1;
     private Spritesheet sprites, spritesTiles;
+    SpriteRenderer obj1Sprite;
 
     MouseControls mouseControls = new MouseControls();
 
@@ -28,21 +32,24 @@ public class LevelEditorScene extends Scene {
         sprites = AssetPool.getSpritesheet("assets/images/spritesheets/p1_spritesheet.png");
         spritesTiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
         if(levelLoaded) {
-            this.activeGameObject = gameObjects.get(1);
+            this.activeGameObject = gameObjects.get(0);
             return;
         }
 
-        obj1 = new GameObject("Object 1", new Transform(new Vector2f(100,100), new Vector2f(256,256)),2);
-        SpriteRenderer obj1Sprite = new SpriteRenderer();
-        obj1Sprite.setSprite(sprites.getSprites().get(5));
+        obj1 = new GameObject("Object 1", new Transform(new Vector2f(200,100),
+                new Vector2f(256,256)),2);
+        obj1Sprite = new SpriteRenderer();
+        obj1Sprite.setColor(new Vector4f(1,0,0,0.4f));
         obj1.addComponent(obj1Sprite);
+        obj1.addComponent(new Rigidbody());
         this.addGameObjectToScene(obj1);
+        this.activeGameObject = obj1;
 
-        GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100), new Vector2f(256,256)), -1);
+        GameObject obj2 = new GameObject("Object 2",
+                new Transform(new Vector2f(400,100), new Vector2f(256,256)), 1);
         SpriteRenderer obj2Sprite = new SpriteRenderer();
-        obj2Sprite.setSprite(sprites.getSprites().get(1));
+        obj2Sprite.setSprite(sprites.getSprite(1));
         obj2.addComponent(obj2Sprite);
-        obj2.addComponent(new Rigidbody());
         this.addGameObjectToScene(obj2);
     }
 
@@ -57,12 +64,15 @@ public class LevelEditorScene extends Scene {
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
     }
 
-    private float afterClickTime = 0.5f;
-    private float afterClickTimeLeft = 0.0f;
-
+    float t = 0.0f;
     @Override
     public void update(float dt) {
         mouseControls.update(dt);
+
+        float x = ((float)Math.sin(t) * 200.0f) + 600;
+        float y = ((float)Math.cos(t) * 200.0f) + 400;
+        t+= 0.05f;
+        DebugDraw.addLine2D(new Vector2f(600,400), new Vector2f(x,y), new Vector3f(0,0,1));
 
 
         for (GameObject go : this.gameObjects) {
@@ -85,7 +95,7 @@ public class LevelEditorScene extends Scene {
 
         float windowX2 = windowPos.x + windowSize.x;
         for (int i = 0; i < spritesTiles.size(); i++) {
-            Sprite sprite = spritesTiles.getSprites().get(i);
+            Sprite sprite = spritesTiles.getSprite(i);
             float spriteWidth = sprite.getWidth() / 2;
             float spriteHeight = sprite.getHeight() / 2;
             int id = sprite.getTexId();
@@ -102,7 +112,7 @@ public class LevelEditorScene extends Scene {
             ImVec2 lastButtonPos = new ImVec2();
             ImGui.getItemRectMax(lastButtonPos);
             float lastButtonX2 = lastButtonPos.x;
-            Sprite nextSprite = i+1<spritesTiles.size()? spritesTiles.getSprites().get(i + 1): sprite;
+            Sprite nextSprite = i+1<spritesTiles.size()? spritesTiles.getSprite(i+1): sprite;
             float nextSpriteWidth = nextSprite.getWidth() / 2;
             float nextButtonX2 = lastButtonX2 + itemSpacing.x + nextSpriteWidth*1.5f;
             if (i + 1 < spritesTiles.size() && nextButtonX2 < windowX2) {

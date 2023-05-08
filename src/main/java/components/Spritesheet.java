@@ -12,7 +12,6 @@ import java.util.List;
 public class Spritesheet {
 
     private Texture texture;
-    @Getter
     private List<Sprite> sprites;
 
     public Spritesheet(Texture texture, int spriteWidth, int spriteHeight, int numSprites, int spacing) {
@@ -75,6 +74,10 @@ public class Spritesheet {
             sprite.setWidth((float)spriteInfo.getWidth());
             this.sprites.add(sprite);
         }
+    }
+
+    public Sprite getSprite(int index) {
+        return this.sprites.get(index);
     }
 
     public int size() {

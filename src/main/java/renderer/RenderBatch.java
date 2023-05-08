@@ -143,6 +143,7 @@ public class RenderBatch implements Comparable<RenderBatch> {
         for (int i = 0; i < textures.size(); i++ ) {
             textures.get(i).unbind();
         }
+        shader.detach();
     }
 
     private void loadVertexProperties(int index) {

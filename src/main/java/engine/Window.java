@@ -3,6 +3,7 @@ package engine;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import renderer.DebugDraw;
 import scenes.LevelEditorScene;
 import scenes.LevelScene;
 import scenes.Scene;
@@ -20,7 +21,7 @@ public class Window {
 
     public float r, g, b, a;
 
-    private static Scene currentScene = null;
+    private static Scene currentScene;
 
     private static Window window = null;
 
@@ -28,9 +29,9 @@ public class Window {
         this.width = 1280;
         this.height = 720;
         this.title = "Jumper";
-        r = 0.7f;
-        g = 0.2f;
-        b = 0.1f;
+        r = 0.9f;
+        g = 0.9f;
+        b = 0.9f;
         a = 1;
     }
 
@@ -137,10 +138,15 @@ public class Window {
             //Poll events
             glfwPollEvents();
 
+            DebugDraw.beginFrame();
+
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (dt >= 0) currentScene.update(dt);
+            if (dt >= 0) {
+                DebugDraw.draw();
+                currentScene.update(dt);
+            }
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);

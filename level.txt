@@ -1,5 +1,6 @@
 [
   {
+    "uid": 0,
     "name": "Object 1",
     "components": [
       {
@@ -7,44 +8,52 @@
         "properties": {
           "color": {
             "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
+            "y": 0.3882353,
+            "z": 0.3882353,
+            "w": 0.64705884
           },
           "sprite": {
-            "texture": {
-              "filepath": "assets/images/p1_spritesheet.png",
-              "texID": 2,
-              "height": 288,
-              "width": 508
-            },
             "texCoords": [
               {
-                "x": 0.5728347,
+                "x": 1.0,
                 "y": 1.0
               },
               {
-                "x": 0.5728347,
-                "y": 0.6631944
+                "x": 1.0,
+                "y": 0.0
               },
               {
-                "x": 0.43110237,
-                "y": 0.6631944
+                "x": 0.0,
+                "y": 0.0
               },
               {
-                "x": 0.43110237,
+                "x": 0.0,
                 "y": 1.0
               }
             ],
-            "height": 97.0,
-            "width": 72.0
-          }
+            "height": 1.0,
+            "width": 1.0
+          },
+          "uid": 0
+        }
+      },
+      {
+        "type": "components.Rigidbody",
+        "properties": {
+          "colliderType": 0,
+          "friction": 0.8,
+          "velocity": {
+            "x": 0.0,
+            "y": 0.5,
+            "z": 0.0
+          },
+          "uid": 1
         }
       }
     ],
     "transform": {
       "position": {
-        "x": 100.0,
+        "x": 200.0,
         "y": 100.0
       },
       "scale": {
@@ -55,6 +64,7 @@
     "zIndex": 2
   },
   {
+    "uid": 1,
     "name": "Object 2",
     "components": [
       {
@@ -68,7 +78,7 @@
           },
           "sprite": {
             "texture": {
-              "filepath": "assets/images/p1_spritesheet.png",
+              "filepath": "assets/images/spritesheets/p1_spritesheet.png",
               "texID": 2,
               "height": 288,
               "width": 508
@@ -93,19 +103,8 @@
             ],
             "height": 92.0,
             "width": 66.0
-          }
-        }
-      },
-      {
-        "type": "components.Rigidbody",
-        "properties": {
-          "colliderType": 14,
-          "friction": 0.8,
-          "velocity": {
-            "x": 0.0,
-            "y": 0.5,
-            "z": 0.0
-          }
+          },
+          "uid": 2
         }
       }
     ],
@@ -119,6 +118,6 @@
         "y": 256.0
       }
     },
-    "zIndex": -1
+    "zIndex": 1
   }
 ]
