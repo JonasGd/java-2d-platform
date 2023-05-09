@@ -1,15 +1,17 @@
 package physics2D.primitives;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.joml.Vector2f;
 import physics2D.rigidbody.Rigidbody2D;
 
 public class Circle {
-    @Getter
+    @Getter @Setter
     private float radius = 1.0f;
-    private Rigidbody2D body = null;
+    @Setter
+    private Rigidbody2D rigidbody = null;
 
     public Vector2f getCenter() {
-        return body.getPosition();
+        return rigidbody.getPosition();
     }
 }

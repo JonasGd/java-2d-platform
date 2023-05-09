@@ -1,14 +1,16 @@
 package physics2D.primitives;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.joml.Vector2f;
 import physics2D.rigidbody.Rigidbody2D;
+import util.EMath;
 
 public class Box2D {
     private Vector2f size = new Vector2f();
     @Getter
     private Vector2f halfSize;
-    @Getter
+    @Getter @Setter
     private Rigidbody2D rigidbody = null;
 
     public Box2D() {
@@ -19,16 +21,16 @@ public class Box2D {
         this.size = new Vector2f(max).sub(min);
     }
 
-    public Vector2f getMin() {
+    public Vector2f getLocalMin() {
         return new Vector2f(this.rigidbody.getPosition()).sub(this.halfSize);
     }
-    public Vector2f getMax() {
+    public Vector2f getLocalMax() {
         return new Vector2f(this.rigidbody.getPosition()).add(this.halfSize);
     }
 
     public Vector2f[] getVertices() {
-        Vector2f min = getMin();
-        Vector2f max = getMax();
+        Vector2f min = getLocalMin();
+        Vector2f max = getLocalMax();
 
         Vector2f[] vertices = {
                 new Vector2f(min.x, min.y), new Vector2f(min.x, max.y),
@@ -37,12 +39,16 @@ public class Box2D {
 
         if (rigidbody.getRotation() != 0.0f) {
             for (Vector2f vert : vertices) {
-                // TODO: IMPLEMENT ME
-                // Rotates point(Vector2f) about center (Vector2f) by rotation(float in radians)
-                //EMath.rotate(vert, this.rigidbody.getPosition(), this.rigidbody.getRotation());
+                //Rotates point(Vector2f) about center (Vector2f) by rotation(float in radians)
+                EMath.rotate(vert, this.rigidbody.getRotation(), this.rigidbody.getPosition());
             }
         }
 
         return vertices;
+    }
+
+    public void setSize(Vector2f size) {
+        this.size.set(size);
+        this.halfSize.set(size.x /2.0f, size.y / 2.0f);
     }
 }
