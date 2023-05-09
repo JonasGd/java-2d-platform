@@ -120,9 +120,11 @@ public class ImGuiLayer {
 
             io.setMouseDown(mouseDown);
 
-            if (!io.getWantCaptureMouse()) {
-                if( mouseDown[1])
-                    ImGui.setWindowFocus(null);
+            if (!io.getWantCaptureMouse() && mouseDown[1]) {
+                ImGui.setWindowFocus(null);
+            }
+
+            if(!io.getWantCaptureMouse() || GameViewWindow.getWantCaptureMouse()) {
                 MouseListener.mouseButtonCallback(w, button, action, mods);
             }
         });
