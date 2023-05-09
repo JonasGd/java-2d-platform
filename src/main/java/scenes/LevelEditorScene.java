@@ -67,10 +67,14 @@ public class LevelEditorScene extends Scene {
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
     }
 
-    float t = 0.0f;
+    float x = 0.0f;
+    float y = 0.0f;
     @Override
     public void update(float dt) {
         levelEditorStuff.update(dt);
+        DebugDraw.addCircle(new Vector2f(x,y), 64, new Vector3f(1,0,0),1);
+        x += 50f * dt;
+        y += 50f * dt;
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);
