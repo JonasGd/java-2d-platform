@@ -15,7 +15,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -72,7 +71,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -129,7 +127,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -186,7 +183,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -243,7 +239,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -300,7 +295,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -357,7 +351,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -414,7 +407,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -471,7 +463,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
@@ -528,7 +519,6 @@
           "sprite": {
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
-              "texID": 3,
               "height": 936,
               "width": 914
             },
