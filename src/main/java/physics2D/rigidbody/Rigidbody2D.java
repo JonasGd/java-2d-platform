@@ -5,9 +5,12 @@ import engine.Transform;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
+import physics2D.primitives.Collider2D;
 
 public class Rigidbody2D extends Component {
     private Transform rawTransform;
+    @Getter @Setter
+    private Collider2D collider;
 
     @Getter
     private Vector2f position = new Vector2f();
@@ -15,6 +18,7 @@ public class Rigidbody2D extends Component {
     private float rotation = 0.0f;
     @Getter
     private float mass = 0.0f;
+    @Getter
     private float inverseMass = 0.0f;
 
     private Vector2f forceAccum = new Vector2f();
@@ -22,6 +26,10 @@ public class Rigidbody2D extends Component {
     private float angularVelocity = 0.0f;
     private float linearDamping = 0.0f;
     private float angularDamping = 0.0f;
+
+    //coefficient of restitution
+    @Getter @Setter
+    private float cor = 1.0f;
 
     private boolean fixedRotation = false;
 
@@ -65,6 +73,18 @@ public class Rigidbody2D extends Component {
         if (this.mass != 0.0f) {
             this.inverseMass = 1.0f / this.mass;
         }
+    }
+
+    public void setVelocity(Vector2f velocity){
+        this.linearVelocity.set(velocity);
+    }
+
+    public Vector2f getVelocity() {
+        return this.linearVelocity;
+    }
+
+    public boolean hasInfiniteMass() {
+        return this.mass == 0.0f;
     }
 
     public void addForce(Vector2f force) {

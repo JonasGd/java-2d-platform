@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.joml.Vector2f;
 import physics2D.rigidbody.Rigidbody2D;
 
-public class Circle {
+public class Circle extends Collider2D{
     @Getter @Setter
     private float radius = 1.0f;
     @Setter
