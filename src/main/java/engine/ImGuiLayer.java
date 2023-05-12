@@ -11,6 +11,7 @@ import imgui.callback.ImStrSupplier;
 import imgui.flag.*;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.type.ImBoolean;
+import lombok.Getter;
 import renderer.PickingTexture;
 import scenes.Scene;
 
@@ -27,6 +28,7 @@ public class ImGuiLayer {
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
     private GameViewWindow gameViewWindow;
+    @Getter
     private PropertiesWindow propertiesWindow;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture) {

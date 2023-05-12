@@ -1,10 +1,7 @@
 package scenes;
 
 import components.*;
-import engine.Camera;
-import engine.GameObject;
-import engine.Prefabs;
-import engine.Transform;
+import engine.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
@@ -27,30 +24,20 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        loadResources();
+        sprites = AssetPool.getSpritesheet("assets/images/spritesheets/p1_spritesheet.png");
+        spritesTiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
+        Spritesheet gizmos = AssetPool.getSpritesheet("assets/images/gizmos.png");
+
         this.camera = new Camera(new Vector2f(-250, 0));
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
         levelEditorStuff.addComponent(new EditorCamera(this.camera));
+        levelEditorStuff.addComponent(new TranslateGizmo(gizmos.getSprite(1),
+                Window.getImGuiLayer().getPropertiesWindow()));
 
-        loadResources();
-        sprites = AssetPool.getSpritesheet("assets/images/spritesheets/p1_spritesheet.png");
-        spritesTiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
+        levelEditorStuff.start();
 
-//        obj1 = new GameObject("Object 1", new Transform(new Vector2f(200,100),
-//                new Vector2f(256,256)),2);
-//        obj1Sprite = new SpriteRenderer();
-//        obj1Sprite.setColor(new Vector4f(1,0,0,0.4f));
-//        obj1.addComponent(obj1Sprite);
-//        obj1.addComponent(new Rigidbody());
-//        this.addGameObjectToScene(obj1);
-//        this.activeGameObject = obj1;
-//
-//        GameObject obj2 = new GameObject("Object 2",
-//                new Transform(new Vector2f(400,100), new Vector2f(256,256)), 1);
-//        SpriteRenderer obj2Sprite = new SpriteRenderer();
-//        obj2Sprite.setSprite(sprites.getSprite(1));
-//        obj2.addComponent(obj2Sprite);
-//        this.addGameObjectToScene(obj2);
     }
 
     private void loadResources(){
@@ -62,6 +49,9 @@ public class LevelEditorScene extends Scene {
         AssetPool.addSpritesheet("assets/images/spritesheets/tiles_spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/tiles_spritesheet.png"),
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
+        AssetPool.addSpritesheet("assets/images/gizmos.png",
+                new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"),
+                        24,48, 2,0));
 
         for (GameObject g : gameObjects) {
             if (g.getComponent(SpriteRenderer.class)!= null) {
@@ -96,6 +86,10 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void imgui() {
+        ImGui.begin("Level Editor Stuff");
+        levelEditorStuff.imgui();
+        ImGui.end();
+
         ImGui.begin("Test window");
 
         ImVec2 windowPos = new ImVec2();
