@@ -27,11 +27,12 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        this.camera = new Camera(new Vector2f(-250, 0));
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
+        levelEditorStuff.addComponent(new EditorCamera(this.camera));
 
         loadResources();
-        this.camera = new Camera(new Vector2f(-250, 0));
         sprites = AssetPool.getSpritesheet("assets/images/spritesheets/p1_spritesheet.png");
         spritesTiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
 
@@ -77,6 +78,8 @@ public class LevelEditorScene extends Scene {
     @Override
     public void update(float dt) {
         levelEditorStuff.update(dt);
+        this.camera.adjustProjection();
+
         DebugDraw.addCircle(new Vector2f(x,y), 64, new Vector3f(1,0,0),1);
         x += 50f * dt;
         y += 50f * dt;
