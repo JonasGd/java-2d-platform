@@ -1,12 +1,9 @@
-package physics2D.rigidbody;
+package physics2Dtut.rigidbody;
 
 import org.joml.Vector2f;
-import org.joml.Vector3f;
-import physics2D.primitives.*;
+import physics2Dtut.primitives.*;
 import renderer.Line2D;
 import util.EMath;
-
-import javax.sound.sampled.Line;
 
 public class IntersectionDetector2D {
     // ======================================================

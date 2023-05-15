@@ -1,12 +1,12 @@
-package physics2D;
+package physics2Dtut;
 
 import org.joml.Vector2f;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import physics2D.primitives.Box2D;
-import physics2D.primitives.Circle;
-import physics2D.rigidbody.IntersectionDetector2D;
-import physics2D.rigidbody.Rigidbody2D;
+import physics2Dtut.primitives.Box2D;
+import physics2Dtut.primitives.Circle;
+import physics2Dtut.rigidbody.IntersectionDetector2D;
+import physics2Dtut.rigidbody.Rigidbody2D;
 import renderer.Line2D;
 
 import static org.junit.Assert.assertTrue;

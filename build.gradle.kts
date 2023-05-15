@@ -5,6 +5,9 @@ plugins {
 version = "1.0-SNAPSHOT"
 
 repositories {
+    flatDir {
+        dirs("libs")
+    }
     mavenCentral()
 }
 
@@ -23,6 +26,9 @@ val lwjglNatives = "natives-windows"
 val imguiVersion = "1.86.10"
 
 dependencies {
+    //Box2D
+    implementation(name, "jbox2d-library")
+
     //jUnit
     testImplementation("junit", "junit", "4.13")
 

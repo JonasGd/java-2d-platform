@@ -1,9 +1,9 @@
-package physics2D.primitives;
+package physics2Dtut.primitives;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
-import physics2D.rigidbody.Rigidbody2D;
+import physics2Dtut.rigidbody.Rigidbody2D;
 import util.EMath;
 
 public class Box2D {

@@ -1,8 +1,8 @@
-package physics2D.primitives;
+package physics2Dtut.primitives;
 
 import lombok.Setter;
 import org.joml.Vector2f;
-import physics2D.rigidbody.Rigidbody2D;
+import physics2Dtut.rigidbody.Rigidbody2D;
 
 //Axis Aligned Bounding Box
 public class AABB {

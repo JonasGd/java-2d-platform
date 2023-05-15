@@ -1,4 +1,4 @@
-package physics2D.rigidbody;
+package physics2Dtut.rigidbody;
 
 import lombok.Getter;
 import lombok.Setter;

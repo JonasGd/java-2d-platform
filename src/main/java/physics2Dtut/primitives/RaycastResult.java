@@ -1,7 +1,6 @@
-package physics2D.primitives;
+package physics2Dtut.primitives;
 
 import org.joml.Vector2f;
-import org.joml.Vector3f;
 
 public class RaycastResult {
     private Vector2f point;

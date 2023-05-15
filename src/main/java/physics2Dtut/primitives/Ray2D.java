@@ -1,4 +1,4 @@
-package physics2D.primitives;
+package physics2Dtut.primitives;
 
 import lombok.Getter;
 import org.joml.Vector2f;

@@ -1,11 +1,11 @@
-package physics2D.rigidbody;
+package physics2Dtut.rigidbody;
 
 import components.Component;
 import engine.Transform;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
-import physics2D.primitives.Collider2D;
+import physics2Dtut.primitives.Collider2D;
 
 public class Rigidbody2D extends Component {
     private Transform rawTransform;
