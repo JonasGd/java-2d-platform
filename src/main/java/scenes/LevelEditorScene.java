@@ -5,9 +5,6 @@ import engine.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-import renderer.DebugDraw;
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
@@ -33,11 +30,9 @@ public class LevelEditorScene extends Scene {
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
         levelEditorStuff.addComponent(new EditorCamera(this.camera));
-        levelEditorStuff.addComponent(new TranslateGizmo(gizmos.getSprite(1),
-                Window.getImGuiLayer().getPropertiesWindow()));
+        levelEditorStuff.addComponent(new GizmoSystem(gizmos));
 
         levelEditorStuff.start();
-
     }
 
     private void loadResources(){
@@ -51,7 +46,7 @@ public class LevelEditorScene extends Scene {
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
         AssetPool.addSpritesheet("assets/images/gizmos.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"),
-                        24,48, 2,0));
+                        24,48, 3,0));
 
         for (GameObject g : gameObjects) {
             if (g.getComponent(SpriteRenderer.class)!= null) {
@@ -69,10 +64,6 @@ public class LevelEditorScene extends Scene {
     public void update(float dt) {
         levelEditorStuff.update(dt);
         this.camera.adjustProjection();
-
-        DebugDraw.addCircle(new Vector2f(x,y), 64, new Vector3f(1,0,0),1);
-        x += 50f * dt;
-        y += 50f * dt;
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);
@@ -109,7 +100,7 @@ public class LevelEditorScene extends Scene {
 
             ImGui.pushID(i);
             if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
-                System.out.println(spriteWidth + ":" + spriteHeight);
+                //System.out.println(spriteWidth + ":" + spriteHeight);
                 GameObject object = Prefabs.generateSpriteObject(sprite, 32, 32);
                 levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
             }
