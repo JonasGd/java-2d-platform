@@ -1,13 +1,16 @@
 package engine;
 
-import lombok.Getter;
+import observers.EventSystem;
+import observers.Observer;
+import observers.events.Event;
+import observers.events.EventType;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import renderer.*;
-import scenes.LevelEditorScene;
-import scenes.LevelScene;
+import scenes.LevelEditorSceneInitializer;
 import scenes.Scene;
+import scenes.SceneInitializer;
 import util.AssetPool;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -15,15 +18,14 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class Window {
+public class Window implements Observer {
     private int width, height;
     private String title;
     private long glfwWindow;
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
     private PickingTexture pickingTexture;
-
-    public float r, g, b, a;
+    private boolean runtimePlaying = false;
 
     private static Scene currentScene;
 
@@ -33,24 +35,16 @@ public class Window {
         this.width = 1920;
         this.height = 1080;
         this.title = "Jumper";
-        r = 0.9f;
-        g = 0.9f;
-        b = 0.9f;
-        a = 1;
+        EventSystem.addObserver(this);
     }
 
-    public static void changeScene(int newScene) {
-        switch (newScene) {
-            case 0:
-                currentScene = new LevelEditorScene();
-                break;
-            case 1:
-                currentScene = new LevelScene();
-                break;
-            default:
-                assert false : "Unknown scene '" + newScene + "'";
-                break;
+    public static void changeScene(SceneInitializer sceneInitializer) {
+        if (currentScene != null) {
+            currentScene.destroy();
         }
+
+        getImGuiLayer().getPropertiesWindow().setActiveGameObject(null);
+        currentScene = new Scene(sceneInitializer);
         currentScene.load();
         currentScene.init();
         currentScene.start();
@@ -135,7 +129,7 @@ public class Window {
         this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
         this.imGuiLayer.initImGui();
 
-        Window.changeScene(0);
+        Window.changeScene(new LevelEditorSceneInitializer());
     }
 
     public void loop() {
@@ -168,13 +162,14 @@ public class Window {
             DebugDraw.beginFrame();
 
             this.framebuffer.bind();
-            glClearColor(r, g, b, a);
+            glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt >= 0) {
                 DebugDraw.draw();
                 Renderer.bindShader(defaultShader);
-                currentScene.update(dt);
+                if (runtimePlaying) currentScene.update(dt);
+                else currentScene.editorUpdate(dt);
                 currentScene.render();
             }
             this.framebuffer.unbind();
@@ -187,8 +182,6 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-
-        currentScene.saveExit();
     }
 
     public static int getWidth() {
@@ -217,4 +210,27 @@ public class Window {
 
     public static ImGuiLayer getImGuiLayer() {return get().imGuiLayer;}
 
+    @Override
+    public void onNotify(GameObject object, Event event) {
+        switch (event.type) {
+            case GameEngineStartPlay:
+                System.out.println("Starting play");
+                this.runtimePlaying = true;
+                currentScene.save();
+                Window.changeScene(new LevelEditorSceneInitializer());
+                break;
+            case GameEngineStopPlay:
+                System.out.println("Stopping play");
+                this.runtimePlaying = false;
+                Window.changeScene(new LevelEditorSceneInitializer());
+                break;
+            case LoadLevel:
+                Window.changeScene(new LevelEditorSceneInitializer());
+                break;
+            case SaveLevel:
+                currentScene.save();
+                break;
+        }
+
+    }
 }

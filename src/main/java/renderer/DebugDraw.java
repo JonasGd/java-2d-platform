@@ -150,12 +150,11 @@ public class DebugDraw {
             for (Vector2f vert : vertices) {
                 EMath.rotate(vert, rotation, center);
             }
-
-            addLine2D(vertices[0], vertices[1], color, lifetime);
-            addLine2D(vertices[0], vertices[3], color, lifetime);
-            addLine2D(vertices[1], vertices[2], color, lifetime);
-            addLine2D(vertices[2], vertices[3], color, lifetime);
         }
+        addLine2D(vertices[0], vertices[1], color, lifetime);
+        addLine2D(vertices[0], vertices[3], color, lifetime);
+        addLine2D(vertices[1], vertices[2], color, lifetime);
+        addLine2D(vertices[2], vertices[3], color, lifetime);
     }
 
     //===============================================================

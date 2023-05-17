@@ -1,6 +1,7 @@
 package engine;
 
 import editor.GameViewWindow;
+import editor.MenuBar;
 import editor.PropertiesWindow;
 import imgui.ImFontAtlas;
 import imgui.ImFontConfig;
@@ -30,11 +31,13 @@ public class ImGuiLayer {
     private GameViewWindow gameViewWindow;
     @Getter
     private PropertiesWindow propertiesWindow;
+    private MenuBar menuBar;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture) {
         this.gameViewWindow = new GameViewWindow();
         this.glfwWindow = glfwWindow;
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
+        this.menuBar = new MenuBar();
     }
 
     //Initialize Dear ImGui.
@@ -202,6 +205,7 @@ public class ImGuiLayer {
         gameViewWindow.imgui();
         propertiesWindow.update(dt, currentScene);
         propertiesWindow.imgui();
+        menuBar.imgui();
         ImGui.end();
         ImGui.render();
 

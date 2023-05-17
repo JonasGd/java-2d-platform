@@ -148,8 +148,11 @@ public class EImGui {
         ImGui.popID();
     }
 
-
     public static float dragFloat(String label, float value) {
+        return dragFloat(label, value, 0.1f);
+    }
+
+    public static float dragFloat(String label, float value, float speed) {
         ImGui.pushID(label);
 
         ImGui.columns(2);
@@ -158,7 +161,7 @@ public class EImGui {
         ImGui.nextColumn();
 
         float[] valArr = {value};
-        ImGui.dragFloat("##dragFloat", valArr, 0.1f);
+        ImGui.dragFloat("##dragFloat", valArr, speed);
 
         ImGui.columns(1);
         ImGui.popID();
