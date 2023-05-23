@@ -140,15 +140,16 @@ public class Scene {
                 .registerTypeAdapter(GameObject.class, new GameObjectDeserializer())
                 .create();
         try (FileWriter writer = new FileWriter("level.txt")){
-            List<GameObject> list = new ArrayList<>();
+            /*List<GameObject> list = new ArrayList<>();
             for (GameObject gameObject : this.gameObjects) {
                 if (gameObject.DoSerialization()) {
                     list.add(gameObject);
                 }
             }
+            */
             List<GameObject> objsToSerialize = new ArrayList<>();
             for(GameObject obj : this.gameObjects) {
-                if (obj.DoSerialization()) {
+                if (obj.doSerialization()) {
                     objsToSerialize.add(obj);
                 }
             }

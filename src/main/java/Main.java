@@ -1,5 +1,3 @@
-package platform;
-
 import engine.Window;
 
 public class Main {

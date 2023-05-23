@@ -27,9 +27,9 @@ public class Window implements Observer {
     private PickingTexture pickingTexture;
     private boolean runtimePlaying = false;
 
-    private static Scene currentScene;
-
     private static Window window = null;
+
+    private static Scene currentScene;
 
     private Window() {
         this.width = 1920;
@@ -214,13 +214,11 @@ public class Window implements Observer {
     public void onNotify(GameObject object, Event event) {
         switch (event.type) {
             case GameEngineStartPlay:
-                System.out.println("Starting play");
                 this.runtimePlaying = true;
                 currentScene.save();
                 Window.changeScene(new LevelEditorSceneInitializer());
                 break;
             case GameEngineStopPlay:
-                System.out.println("Stopping play");
                 this.runtimePlaying = false;
                 Window.changeScene(new LevelEditorSceneInitializer());
                 break;

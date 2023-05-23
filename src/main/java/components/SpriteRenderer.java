@@ -82,8 +82,8 @@ public class SpriteRenderer extends Component {
 
     public void setColor(Vector4f color) {
         if(!this.color.equals(color)) {
-            this.color.set(color);
             this.isDirty = true;
+            this.color.set(color);
         }
     }
 

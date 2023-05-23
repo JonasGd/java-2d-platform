@@ -60,7 +60,7 @@ public class EImGui {
         float[] vecValuesY = {values.y};
         ImGui.dragFloat("##y", vecValuesY, 0.1f);
         ImGui.popItemWidth();
-
+        ImGui.sameLine();
 
         ImGui.nextColumn();
 

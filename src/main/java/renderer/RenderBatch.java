@@ -46,7 +46,11 @@ public class RenderBatch implements Comparable<RenderBatch> {
     private int maxBatchSize;
     private int zIndex;
 
-    public RenderBatch(int maxBatchSize, int zIndex) {
+    private Renderer renderer;
+
+    public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer) {
+        this.renderer = renderer;
+
         this.zIndex = zIndex;
         //shader = AssetPool.getShader("assets/shaders/default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
@@ -120,6 +124,12 @@ public class RenderBatch implements Comparable<RenderBatch> {
                 spr.setClean();
                 rebufferData = true;
             }
+
+            if (spr.gameObject.transform.zIndex != this.zIndex) {
+                destroyIfExists(spr.gameObject);
+                renderer.add(spr.gameObject);
+                i--;
+            }
         }
         if (rebufferData) {
             glBindBuffer(GL_ARRAY_BUFFER, vboID);
@@ -174,7 +184,9 @@ public class RenderBatch implements Comparable<RenderBatch> {
         boolean isRotated = sprite.gameObject.transform.rotation != 0.0f;
         Matrix4f transformMatrix = new Matrix4f().identity();
         if (isRotated) {
-            transformMatrix.translate(sprite.gameObject.transform.position.x, sprite.gameObject.transform.position.y, 0);
+            transformMatrix.translate(sprite.gameObject.transform.position.x, sprite.gameObject.transform.position.y, 0f);
+            //transformMatrix.rotate((float) Math.toRadians(sprite.gameObject.transform.rotation),
+            //        0, 0, 1);
             transformMatrix.rotate(sprite.gameObject.transform.rotation, 0,0,1);
             transformMatrix.scale(sprite.gameObject.transform.scale.x, sprite.gameObject.transform.scale.y, 1);
         }
@@ -182,13 +194,13 @@ public class RenderBatch implements Comparable<RenderBatch> {
         //add vertices with appropriate properties
         // *   *
         // *   *
-        float modifier = (float) sprite.getSprite().getHeight()/sprite.getSprite().getWidth();
-        float xAdd = 1.0f;
-        float yAdd = modifier;
+        float modifier = sprite.getSprite().getHeight()/sprite.getSprite().getWidth();
+        float xAdd = 0.5f;
+        float yAdd = 0.5f * modifier;
         for (int i = 0; i < 4; i++) {
-            if (i == 1) yAdd = 0.0f;
-            else if (i == 2) xAdd = 0.0f;
-            else if (i == 3) yAdd = modifier;
+            if (i == 1) yAdd = -0.5f;
+            else if (i == 2) xAdd = -0.5f;
+            else if (i == 3) yAdd = 0.5f * modifier;
 
             Vector4f currentPos = new Vector4f(sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x),
                     sprite.gameObject.transform.position.y + (yAdd * sprite.gameObject.transform.scale.y), 0,1);

@@ -1,22 +1,22 @@
 [
   {
-    "uid": 5,
+    "uid": 18,
     "name": "Sprite_Object_Gen",
     "components": [
       {
         "type": "engine.Transform",
         "properties": {
           "position": {
-            "x": 320.0,
-            "y": 416.0
+            "x": -248.5,
+            "y": 1.0
           },
           "scale": {
-            "x": 32.0,
-            "y": 32.0
+            "x": 0.25,
+            "y": 0.25
           },
           "originalScale": {
-            "x": 32.0,
-            "y": 32.0
+            "x": 0.25,
+            "y": 0.25
           },
           "rotation": 0.0,
           "zIndex": 0,
@@ -33,6 +33,210 @@
             "w": 1.0
           },
           "sprite": {
+            "width": 70.0,
+            "height": 70.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
+              "height": 936,
+              "width": 914
+            },
+            "texCoords": [
+              {
+                "x": 0.785558,
+                "y": 1.0
+              },
+              {
+                "x": 0.785558,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 20
+        }
+      },
+      {
+        "type": "physics2D.components.RigidBody2D",
+        "properties": {
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "angularDamping": 0.8,
+          "linearDamping": 0.9,
+          "mass": 0.0,
+          "bodyType": "Static",
+          "fixedRotation": false,
+          "continuousCollision": true,
+          "uid": 25
+        }
+      },
+      {
+        "type": "physics2D.components.Box2DCollider",
+        "properties": {
+          "halfSize": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "uid": 26
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 19,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "engine.Transform",
+        "properties": {
+          "position": {
+            "x": -248.0,
+            "y": 1.0
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "originalScale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 21
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 70.0,
+            "height": 70.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
+              "height": 936,
+              "width": 914
+            },
+            "texCoords": [
+              {
+                "x": 0.785558,
+                "y": 1.0
+              },
+              {
+                "x": 0.785558,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 22
+        }
+      },
+      {
+        "type": "physics2D.components.RigidBody2D",
+        "properties": {
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "angularDamping": 0.8,
+          "linearDamping": 0.9,
+          "mass": 0.0,
+          "bodyType": "Static",
+          "fixedRotation": false,
+          "continuousCollision": true,
+          "uid": 27
+        }
+      },
+      {
+        "type": "physics2D.components.Box2DCollider",
+        "properties": {
+          "halfSize": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "uid": 28
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 20,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "engine.Transform",
+        "properties": {
+          "position": {
+            "x": -248.3,
+            "y": 1.75
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "originalScale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 27.54,
+          "zIndex": 0,
+          "uid": 23
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 70.0,
+            "height": 70.0,
             "texture": {
               "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
               "height": 936,
@@ -55,19 +259,33 @@
                 "x": 0.078774616,
                 "y": 0.30769232
               }
-            ],
-            "height": 70.0,
-            "width": 70.0
+            ]
           },
-          "uid": 20
+          "uid": 24
+        }
+      },
+      {
+        "type": "physics2D.components.RigidBody2D",
+        "properties": {
+          "velocity": {
+            "x": 10.0,
+            "y": 10.0
+          },
+          "angularDamping": 0.8,
+          "linearDamping": 0.9,
+          "mass": 0.0,
+          "bodyType": "Dynamic",
+          "fixedRotation": false,
+          "continuousCollision": true,
+          "uid": 29
         }
       },
       {
         "type": "physics2D.components.Box2DCollider",
         "properties": {
           "halfSize": {
-            "x": 32.0,
-            "y": 32.0
+            "x": 0.25,
+            "y": 0.25
           },
           "origin": {
             "x": 0.0,
@@ -77,7 +295,74 @@
             "x": 0.0,
             "y": 0.0
           },
+          "uid": 30
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 21,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "engine.Transform",
+        "properties": {
+          "position": {
+            "x": -247.75,
+            "y": 1.0
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "originalScale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
           "uid": 21
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 70.0,
+            "height": 70.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
+              "height": 936,
+              "width": 914
+            },
+            "texCoords": [
+              {
+                "x": 0.785558,
+                "y": 1.0
+              },
+              {
+                "x": 0.785558,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 0.9252137
+              },
+              {
+                "x": 0.70897156,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 22
         }
       },
       {
@@ -89,11 +374,29 @@
           },
           "angularDamping": 0.8,
           "linearDamping": 0.9,
-          "mass": 13.2,
-          "bodyType": "Dynamic",
+          "mass": 0.0,
+          "bodyType": "Static",
           "fixedRotation": false,
           "continuousCollision": true,
-          "uid": 22
+          "uid": 27
+        }
+      },
+      {
+        "type": "physics2D.components.Box2DCollider",
+        "properties": {
+          "halfSize": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "origin": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "uid": 28
         }
       }
     ],

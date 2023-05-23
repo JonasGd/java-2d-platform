@@ -11,8 +11,8 @@ public class EMath {
         float cos = (float)Math.cos(angle);
         float sin = (float)Math.sin(angle);
 
-        float xPrime = x * cos - y * sin;
-        float yPrime = x * sin + y * cos;
+        float xPrime = (x * cos) - (y * sin);
+        float yPrime = (x * sin) + (y * cos);
 
         xPrime += origin.x;
         yPrime += origin.y;

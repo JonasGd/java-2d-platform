@@ -13,14 +13,12 @@ import physics2D.components.Box2DCollider;
 import physics2D.components.CircleCollider;
 import physics2D.components.RigidBody2D;
 
-import javax.imageio.spi.ImageInputStreamSpi;
-
 public class Physics2D {
     private Vec2 gravity = new Vec2(0,-10.0f);
     private World world = new World(gravity);
 
     private float physicsTime = 0.0f;
-    private float phyicsTimeStep = 1.0f / 60.0f;
+    private float physicsTimeStep = 1.0f / 60.0f;
     private int velocityIterations = 8;
     private int positionIterations = 3;
 
@@ -63,7 +61,7 @@ public class Physics2D {
 
             Body body = this.world.createBody(bodyDef);
             rb.setRawBody(body);
-            body.createFixture(shape, rb.getMass());
+            body.createFixture(shape, rb.getMass()+5);
         }
     }
 
@@ -80,8 +78,8 @@ public class Physics2D {
     public void update(float dt){
         physicsTime += dt;
         if (physicsTime >= 0.0f) {
-            physicsTime -= phyicsTimeStep;
-            world.step(phyicsTimeStep, velocityIterations, positionIterations);
+            physicsTime -= physicsTimeStep;
+            world.step(physicsTimeStep, velocityIterations, positionIterations);
         }
     }
 }

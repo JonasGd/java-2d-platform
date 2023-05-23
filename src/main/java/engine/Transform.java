@@ -3,6 +3,7 @@ package engine;
 import components.Component;
 import editor.EImGui;
 import org.joml.Vector2f;
+import util.Settings;
 
 public class Transform extends Component {
     public Vector2f position;
@@ -20,7 +21,7 @@ public class Transform extends Component {
     }
 
     public Transform(Vector2f position, Vector2f scale) {
-        init(position, scale, null);
+        this(position, scale, null);
     }
 
     public Transform(Vector2f position, Vector2f scale, Vector2f originalScale) {
@@ -31,7 +32,7 @@ public class Transform extends Component {
         this.position = position;
         this.scale = scale;
         this.zIndex = 0;
-        this.originalScale = new Vector2f(32,32);
+        this.originalScale = new Vector2f(Settings.GRID_WIDTH,Settings.GRID_HEIGHT);
         /*
         if (originalScale == null && (this.originalScale == null || this.originalScale.equals(new Vector2f()))) {
             this.originalScale = scale;
@@ -45,7 +46,7 @@ public class Transform extends Component {
     @Override
     public void imgui() {
         EImGui.drawVec2Control("Position", this.position);
-        EImGui.drawVec2Control("Scale", this.scale, 32.0f);
+        EImGui.drawVec2Control("Scale", this.scale, Settings.GRID_WIDTH);
         this.rotation = EImGui.dragFloat("Rotation", this.rotation, 0.02f);
         this.zIndex = EImGui.dragInt("Z-Index", this.zIndex);
     }

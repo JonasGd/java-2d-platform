@@ -34,8 +34,8 @@ public class ImGuiLayer {
     private MenuBar menuBar;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture) {
-        this.gameViewWindow = new GameViewWindow();
         this.glfwWindow = glfwWindow;
+        this.gameViewWindow = new GameViewWindow();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
         this.menuBar = new MenuBar();
     }
@@ -236,7 +236,7 @@ public class ImGuiLayer {
     private void endFrame() {
         //After Dear ImGui prepared a draw data, we use it in the LWJGL3 renderer
         //At that moment ImGui will be rendered to the current OpenGl context
-        imGuiGl3.renderDrawData(ImGui.getDrawData());
+        imGuiGl3.render(ImGui.getDrawData());
     }
 
     //If you want to clean a room after yourself - do it by yourself

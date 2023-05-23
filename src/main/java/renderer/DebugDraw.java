@@ -9,7 +9,6 @@ import util.EMath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -160,12 +159,20 @@ public class DebugDraw {
     //===============================================================
     // Add Circle methods
     //===============================================================
+    public static void addCircle(Vector2f center, float radius) {
+        addCircle(center, radius, new Vector3f(0,1,0), 1);
+    }
+
+    public static void addCircle(Vector2f center, float radius, Vector3f color) {
+        addCircle(center, radius, color, 1);
+    }
+
     public static void addCircle(Vector2f center, float radius, Vector3f color, int lifetime) {
         Vector2f[] points = new Vector2f[20];
-        float increment = (float) (2* Math.PI / (float)points.length);
-        float currentAngle = 0.0f;
+        float increment = (float) (2f* Math.PI / (float)points.length);
+        float currentAngle = 0;
         for (int i = 0; i < points.length; i++) {
-            Vector2f tmp = new Vector2f(radius, 0);
+            Vector2f tmp = new Vector2f(0, radius);
             EMath.rotate(tmp, currentAngle, new Vector2f());
             points[i] = new Vector2f(tmp).add(center);
 
@@ -175,14 +182,6 @@ public class DebugDraw {
             currentAngle += increment;
         }
         addLine2D(points[points.length - 1], points[0], color, lifetime);
-    }
-
-    public static void addCircle(Vector2f center, float radius) {
-        addCircle(center, radius, new Vector3f(0,1,0), 1);
-    }
-
-    public static void addCircle(Vector2f center, float radius, Vector3f color) {
-        addCircle(center, radius, color, 1);
     }
 
 }

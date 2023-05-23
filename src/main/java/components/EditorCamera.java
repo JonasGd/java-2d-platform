@@ -12,7 +12,7 @@ public class EditorCamera extends Component{
 
     private float dragDebounce = 0.1f;
 
-    private final Camera levelEditorCamera;
+    private Camera levelEditorCamera;
     private Vector2f clickOrigin;
     private boolean reset = false;
 

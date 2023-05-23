@@ -69,6 +69,6 @@ public class PickingTexture {
         float pixels[] = new float[3];
         glReadPixels(x, y, 1,1,GL_RGB, GL_FLOAT, pixels);
 
-        return (int)(pixels[0] - 1);
+        return (int)(pixels[0]) - 1;
     }
 }
