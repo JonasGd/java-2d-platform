@@ -17,7 +17,7 @@ repositories {
 project.ext.lwjglVersion = "3.2.3"
 project.ext.jomlVersion = "1.9.23"
 project.ext.lwjglNatives = "natives-windows"
-project.ext.imguiVersion = '1.77-0.17.1'
+project.ext.imguiVersion = "1.86.10"
 
 dependencies {
     // Box2D
@@ -30,11 +30,11 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // ImGUI stuff
-    implementation "io.imgui.java:binding:$imguiVersion"
-    implementation "io.imgui.java:lwjgl3:$imguiVersion"
+    implementation "io.github.spair:imgui-java-app:$imguiVersion"
+    implementation "io.github.spair:imgui-java-lwjgl3:$imguiVersion"
 
     // Include all available natives, but it's likely that you want something specific
-    runtimeOnly "io.imgui.java:natives-windows:$imguiVersion"
+    implementation "io.github.spair:imgui-java-natives-windows:$imguiVersion"
 
 
     // LWJGL stuff
