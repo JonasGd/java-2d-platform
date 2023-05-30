@@ -53,8 +53,8 @@ public class ImGuiLayer {
 
         io.setIniFilename("imgui.ini"); // save configuration of windows
         //io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard); // navigation with keyboard
-        io.setConfigFlags(ImGuiConfigFlags.DockingEnable);
-        //io.setConfigFlags(ImGuiConfigFlags.ViewportsEnable);
+        io.addConfigFlags(ImGuiConfigFlags.DockingEnable);
+        io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
         //io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors); // mouse cursors to display while resizing
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
@@ -190,10 +190,10 @@ public class ImGuiLayer {
         ImGui.render();
         imGuiGl3.renderDrawData(ImGui.getDrawData());
 
-//        long backupWindowPtr = glfwGetCurrentContext();
-//        ImGui.updatePlatformWindows();
-//        ImGui.renderPlatformWindowsDefault();
-//        glfwMakeContextCurrent(backupWindowPtr);
+        long backupWindowPtr = glfwGetCurrentContext();
+        ImGui.updatePlatformWindows();
+        ImGui.renderPlatformWindowsDefault();
+        glfwMakeContextCurrent(backupWindowPtr);
 
     }
 
@@ -206,10 +206,10 @@ public class ImGuiLayer {
     private void setupDockspace() {
         int windowFlags = ImGuiWindowFlags.MenuBar | ImGuiWindowFlags.NoDocking;
 
-//        ImGuiViewport mainViewPort = ImGui.getMainViewport();
-//        ImGui.setNextWindowPos(mainViewPort.getWorkPosX(), mainViewPort.getWorkPosY());
-//        ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(), mainViewPort.getWorkSizeY());
-//        ImGui.setNextWindowViewport(mainViewPort.getID());
+        ImGuiViewport mainViewPort = ImGui.getMainViewport();
+        ImGui.setNextWindowPos(mainViewPort.getWorkPosX(), mainViewPort.getWorkPosY());
+        ImGui.setNextWindowSize(mainViewPort.getWorkSizeX(), mainViewPort.getWorkSizeY());
+        ImGui.setNextWindowViewport(mainViewPort.getID());
         ImGui.setNextWindowPos(0.0f, 0.0f);
         ImGui.setNextWindowSize(Window.getWidth(), Window.getHeight());
         ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, 0.0f);
