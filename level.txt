@@ -1,6 +1,6 @@
 [
   {
-    "uid": 18,
+    "uid": 78,
     "name": "Sprite_Object_Gen",
     "components": [
       {
@@ -101,7 +101,7 @@
     "isDead": false
   },
   {
-    "uid": 19,
+    "uid": 79,
     "name": "Sprite_Object_Gen",
     "components": [
       {
@@ -202,7 +202,7 @@
     "isDead": false
   },
   {
-    "uid": 20,
+    "uid": 80,
     "name": "Sprite_Object_Gen",
     "components": [
       {
@@ -303,7 +303,7 @@
     "isDead": false
   },
   {
-    "uid": 21,
+    "uid": 81,
     "name": "Sprite_Object_Gen",
     "components": [
       {
@@ -397,6 +397,498 @@
             "y": 0.0
           },
           "uid": 28
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 87,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "engine.Transform",
+        "properties": {
+          "position": {
+            "x": -0.875,
+            "y": 3.125
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "originalScale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 54
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.8,
+            "w": 0.5
+          },
+          "sprite": {
+            "width": 72.0,
+            "height": 97.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+              "height": 288,
+              "width": 508
+            },
+            "texCoords": [
+              {
+                "x": 0.14173229,
+                "y": 1.0
+              },
+              {
+                "x": 0.14173229,
+                "y": 0.6631944
+              },
+              {
+                "x": 0.0,
+                "y": 0.6631944
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 55
+        }
+      },
+      {
+        "type": "components.StateMachine",
+        "properties": {
+          "stateTransfers": {},
+          "states": [
+            {
+              "title": "Run",
+              "animationFrames": [
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.14173229,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.14173229,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.0,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.0,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.28543308,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.28543308,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.1437008,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.1437008,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.42913386,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.42913386,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.2874016,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.2874016,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.14173229,
+                        "y": 0.6597222
+                      },
+                      {
+                        "x": 0.14173229,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.0,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.0,
+                        "y": 0.6597222
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.28543308,
+                        "y": 0.6597222
+                      },
+                      {
+                        "x": 0.28543308,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.1437008,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.1437008,
+                        "y": 0.6597222
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.42913386,
+                        "y": 0.6597222
+                      },
+                      {
+                        "x": 0.42913386,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.2874016,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.2874016,
+                        "y": 0.6597222
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.5728347,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.5728347,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.43110237,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.43110237,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.71653545,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.71653545,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.5748032,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.5748032,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.5728347,
+                        "y": 0.6597222
+                      },
+                      {
+                        "x": 0.5728347,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.43110237,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.43110237,
+                        "y": 0.6597222
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.8602362,
+                        "y": 1.0
+                      },
+                      {
+                        "x": 0.8602362,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.71850395,
+                        "y": 0.6631944
+                      },
+                      {
+                        "x": 0.71850395,
+                        "y": 1.0
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                },
+                {
+                  "sprite": {
+                    "width": 72.0,
+                    "height": 97.0,
+                    "texture": {
+                      "filepath": "assets/images/spritesheets/p1_spritesheet.png",
+                      "height": 288,
+                      "width": 508
+                    },
+                    "texCoords": [
+                      {
+                        "x": 0.71653545,
+                        "y": 0.6597222
+                      },
+                      {
+                        "x": 0.71653545,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.5748032,
+                        "y": 0.32291666
+                      },
+                      {
+                        "x": 0.5748032,
+                        "y": 0.6597222
+                      }
+                    ]
+                  },
+                  "frameTime": 0.23
+                }
+              ],
+              "doesLoop": true
+            }
+          ],
+          "defaultStateTitle": "Run",
+          "uid": 56
+        }
+      },
+      {
+        "type": "components.NonPickable",
+        "properties": {
+          "uid": 57
+        }
+      }
+    ],
+    "doSerialization": true,
+    "isDead": false
+  },
+  {
+    "uid": 91,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "engine.Transform",
+        "properties": {
+          "position": {
+            "x": -0.875,
+            "y": 2.625
+          },
+          "scale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "originalScale": {
+            "x": 0.25,
+            "y": 0.25
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 81
+        }
+      },
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 0.8,
+            "y": 0.8,
+            "z": 0.8,
+            "w": 0.5
+          },
+          "sprite": {
+            "width": 70.0,
+            "height": 70.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/tiles_spritesheet.png",
+              "height": 936,
+              "width": 914
+            },
+            "texCoords": [
+              {
+                "x": 0.07658643,
+                "y": 0.61538464
+              },
+              {
+                "x": 0.07658643,
+                "y": 0.5405983
+              },
+              {
+                "x": 0.0,
+                "y": 0.5405983
+              },
+              {
+                "x": 0.0,
+                "y": 0.61538464
+              }
+            ]
+          },
+          "uid": 82
+        }
+      },
+      {
+        "type": "components.NonPickable",
+        "properties": {
+          "uid": 83
         }
       }
     ],

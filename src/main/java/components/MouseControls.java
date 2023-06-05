@@ -9,12 +9,11 @@ import lombok.Setter;
 import org.joml.Vector4f;
 import util.Settings;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class MouseControls extends Component{
     GameObject holdingObject = null;
-    private float debounceTime = 0.1f;
+    private float debounceTime = 0.2f;
     private float debounce = debounceTime;
 
     public void pickupObject(GameObject go) {
@@ -29,6 +28,9 @@ public class MouseControls extends Component{
 
     public void place() {
         GameObject newObj = this.holdingObject.copy();
+        if (newObj.getComponent(StateMachine.class) != null) {
+            newObj.getComponent(StateMachine.class).refreshTextures();
+        }
         newObj.getComponent(SpriteRenderer.class).setColor(new Vector4f(1,1,1,1));
         newObj.removeComponent(NonPickable.class);
         Window.getScene().addGameObjectToScene(newObj);
@@ -48,10 +50,11 @@ public class MouseControls extends Component{
                 debounce = debounceTime;
             }
 
-            if (KeyListener.isKeyPressed(GLFW_KEY_ESCAPE)) {
+            if (KeyListener.isKeyPressed(GLFW_KEY_ESCAPE) || MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_RIGHT)) {
                 holdingObject.destroy();
                 holdingObject = null;
             }
+
 
         }
     }
