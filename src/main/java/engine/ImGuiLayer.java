@@ -28,6 +28,7 @@ public class ImGuiLayer {
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
     private final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
 
+    @Getter
     private GameViewWindow gameViewWindow;
     @Getter
     private PropertiesWindow propertiesWindow;
@@ -109,6 +110,8 @@ public class ImGuiLayer {
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
             if(!io.getWantCaptureMouse() || gameViewWindow.getWantCaptureMouse())
                 MouseListener.mouseScrollCallback(w, xOffset, yOffset);
+            else
+                MouseListener.clear();
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {
@@ -168,7 +171,6 @@ public class ImGuiLayer {
         currentScene.imgui();
         //ImGui.showDemoWindow();
         gameViewWindow.imgui();
-        propertiesWindow.update(dt, currentScene);
         propertiesWindow.imgui();
         sceneHierarchyWindow.imgui();
 
