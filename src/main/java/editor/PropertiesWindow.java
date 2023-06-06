@@ -1,10 +1,12 @@
 package editor;
 
 import components.NonPickable;
+import components.SpriteRenderer;
 import engine.GameObject;
 import engine.MouseListener;
 import imgui.ImGui;
 import lombok.Getter;
+import org.joml.Vector4f;
 import physics2D.components.Box2DCollider;
 import physics2D.components.CircleCollider;
 import physics2D.components.RigidBody2D;
@@ -14,10 +16,9 @@ import scenes.Scene;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
-
 public class PropertiesWindow {
     private List<GameObject> activeGameObjects;
+    private List<Vector4f> activeGameObjectOGColor;
     private GameObject activeGameObject = null;
     @Getter
     private PickingTexture pickingTexture;
@@ -25,6 +26,7 @@ public class PropertiesWindow {
     public PropertiesWindow(PickingTexture pickingTexture) {
         this.activeGameObjects = new ArrayList<>();
         this.pickingTexture = pickingTexture;
+        this.activeGameObjectOGColor = new ArrayList<>();
     }
 
     public void imgui(){
@@ -65,7 +67,18 @@ public class PropertiesWindow {
     }
 
     public void clearSelected() {
+        if (activeGameObjectOGColor.size() > 0) {
+            int i = 0;
+            for (GameObject go : activeGameObjects) {
+                SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
+                if (spr != null) {
+                    spr.setColor(activeGameObjectOGColor.get(i));
+                }
+                i++;
+            }
+        }
         this.activeGameObjects.clear();
+        this.activeGameObjectOGColor.clear();
     }
 
     public void setActiveGameObject(GameObject go) {
@@ -76,6 +89,13 @@ public class PropertiesWindow {
     }
 
     public void addActiveGameObject(GameObject go) {
+        SpriteRenderer spr = go.getComponent(SpriteRenderer.class);
+        if (spr != null) {
+            this.activeGameObjectOGColor.add(new Vector4f(spr.getColor()));
+            spr.setColor(new Vector4f(0.8f, 0.8f,0.0f,0.8f));
+        }else {
+            this.activeGameObjectOGColor.add(new Vector4f());
+        }
         this.activeGameObjects.add(go);
     }
 }
