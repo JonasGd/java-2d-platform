@@ -5,6 +5,10 @@ import engine.*;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
+import physics2D.components.Box2DCollider;
+import physics2D.components.RigidBody2D;
+import physics2D.enums.BodyType;
+import physics2Dtut.primitives.Box2D;
 import util.AssetPool;
 
 import java.io.File;
@@ -43,9 +47,21 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
         AssetPool.addSpritesheet("assets/images/spritesheets/p1_spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/p1_spritesheet.png"),
                         "assets/images/spritesheets/p1_spritesheet.txt"));
+        AssetPool.addSpritesheet("assets/images/spritesheets/p2_spritesheet.png",
+                new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/p2_spritesheet.png"),
+                        "assets/images/spritesheets/p2_spritesheet.txt"));
+        AssetPool.addSpritesheet("assets/images/spritesheets/p3_spritesheet.png",
+                new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/p3_spritesheet.png"),
+                        "assets/images/spritesheets/p3_spritesheet.txt"));
+        AssetPool.addSpritesheet("assets/images/spritesheets/enemies_spritesheet.png",
+                new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/enemies_spritesheet.png"),
+                        "assets/images/spritesheets/enemies_spritesheet.txt"));
         AssetPool.addSpritesheet("assets/images/spritesheets/tiles_spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/tiles_spritesheet.png"),
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
+        AssetPool.addSpritesheet("assets/images/spritesheets/items.png",
+                new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/items_spritesheet.png"),
+                        "assets/images/spritesheets/items_spritesheet.xml"));
         AssetPool.addSpritesheet("assets/images/gizmos.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"),
                         24,48, 3,0));
@@ -100,6 +116,11 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
 
                 float windowX2 = windowPos.x + windowSize.x;
                 for (int i = 0; i < spritesTiles.size(); i++) {
+                    if (i >= 58 && i < 64) continue;
+                    if (i >= 84 && i < 96) continue;
+                    if (i >= 102 && i < 105) continue;
+                    if (i >= 125 && i < 129) continue;
+                    if (i >= 168) continue;
                     Sprite sprite = spritesTiles.getSprite(i);
                     float spriteWidth = sprite.getWidth() / 2;
                     float spriteHeight = sprite.getHeight() / 2;
@@ -109,6 +130,17 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                     ImGui.pushID(i);
                     if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
                         GameObject object = Prefabs.generateSpriteObject(sprite, 0.25f, 0.25f);
+                        RigidBody2D rb = new RigidBody2D();
+                        rb.setBodyType(BodyType.Static);
+                        object.addComponent(rb);
+                        Box2DCollider b2d = new Box2DCollider();
+                        b2d.setHalfSize(new Vector2f(0.25f,0.25f));
+                        object.addComponent(b2d);
+                        object.addComponent(new Ground());
+                        if (i < 11) {
+                            //object.addComponent(new BreakableBrick());
+                        }
+
                         levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
                     }
                     ImGui.popID();
