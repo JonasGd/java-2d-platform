@@ -59,7 +59,7 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
         AssetPool.addSpritesheet("assets/images/spritesheets/tiles_spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/tiles_spritesheet.png"),
                         "assets/images/spritesheets/tiles_spritesheet.xml"));
-        AssetPool.addSpritesheet("assets/images/spritesheets/items.png",
+        AssetPool.addSpritesheet("assets/images/spritesheets/items_spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheets/items_spritesheet.png"),
                         "assets/images/spritesheets/items_spritesheet.xml"));
         AssetPool.addSpritesheet("assets/images/gizmos.png",
@@ -116,6 +116,7 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
 
                 float windowX2 = windowPos.x + windowSize.x;
                 for (int i = 0; i < spritesTiles.size(); i++) {
+                    if (i > 1 && i < 6) continue;
                     if (i >= 58 && i < 64) continue;
                     if (i >= 84 && i < 96) continue;
                     if (i >= 102 && i < 105) continue;
@@ -137,8 +138,8 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                         b2d.setHalfSize(new Vector2f(0.25f,0.25f));
                         object.addComponent(b2d);
                         object.addComponent(new Ground());
-                        if (i < 11) {
-                            //object.addComponent(new BreakableBrick());
+                        if (i < 15) {
+                            object.addComponent(new BreakableBrick());
                         }
 
                         levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
@@ -171,6 +172,15 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                     levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
                 }
                 ImGui.sameLine();
+
+                Spritesheet interactiveTiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
+                sprite = interactiveTiles.getSprite(2);
+                id = sprite.getTexId();
+                texCoords = sprite.getTexCoords();
+                if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
+                    GameObject object = Prefabs.generateQuestionBlock();
+                    levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
+                }
 
                 ImGui.endTabItem();
             }

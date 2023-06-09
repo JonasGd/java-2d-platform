@@ -71,10 +71,17 @@ public class RigidBody2D extends Component {
     @Override
     public void update(float dt) {
         if (rawBody != null) {
-            this.gameObject.transform.position.set(
-                    rawBody.getPosition().x, rawBody.getPosition().y
-            );
-            this.gameObject.transform.rotation = rawBody.getAngle();
+            if (this.bodyType == BodyType.Dynamic || this.bodyType == BodyType.Kinematic) {
+                this.gameObject.transform.position.set(
+                        rawBody.getPosition().x, rawBody.getPosition().y
+                );
+                this.gameObject.transform.rotation = rawBody.getAngle();
+                Vec2 val = rawBody.getLinearVelocity();
+                this.velocity.set(val.x, val.y);
+            } else if (this.bodyType == BodyType.Static) {
+                this.rawBody.setTransform(new Vec2(this.gameObject.transform.position.x, this.gameObject.transform.position.y),
+                        this.gameObject.transform.rotation);
+            }
         }
     }
 }

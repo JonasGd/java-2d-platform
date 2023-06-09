@@ -1,12 +1,8 @@
 package engine;
 
-import components.AnimationState;
-import components.PlayerController;
-import components.Sprite;
-import components.SpriteRenderer;
-import components.Spritesheet;
-import components.StateMachine;
+import components.*;
 import org.joml.Vector2f;
+import physics2D.components.Box2DCollider;
 import physics2D.components.PillboxCollider;
 import physics2D.components.RigidBody2D;
 import physics2D.enums.BodyType;
@@ -228,5 +224,57 @@ public class Prefabs {
         jumper.addComponent(new PlayerController());
 
         return jumper;
+    }
+
+    public static GameObject generateQuestionBlock() {
+        Spritesheet tilesSprites = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
+        GameObject questionBlock = generateSpriteObject(tilesSprites.getSprite(2), 0.25f, 0.25f);
+
+        AnimationState active = new AnimationState();
+        active.title = "Active";
+        active.addFrame(tilesSprites.getSprite(2), 0.2f);
+        active.setLoop(false);
+
+        AnimationState inactive = new AnimationState();
+        inactive.title = "Inactive";
+        inactive.addFrame(tilesSprites.getSprite(5), 0.2f);
+        inactive.setLoop(false);
+
+        StateMachine stateMachine = new StateMachine();
+        stateMachine.addState(active);
+        stateMachine.addState(inactive);
+        stateMachine.setDefaultState(active.title);
+        stateMachine.addState(active.title, inactive.title, "setInactive");
+        questionBlock.addComponent(stateMachine);
+        questionBlock.addComponent(new QuestionBlock());
+
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Static);
+        questionBlock.addComponent(rb);
+        Box2DCollider b2d = new Box2DCollider();
+        b2d.setHalfSize(new Vector2f(0.25f, 0.25f));
+        questionBlock.addComponent(b2d);
+        questionBlock.addComponent(new Ground());
+
+        return questionBlock;
+    }
+
+    public static GameObject generateBlockCoin() {
+        Spritesheet items = AssetPool.getSpritesheet("assets/images/spritesheets/items_spritesheet.png");
+        GameObject coin = generateSpriteObject(items.getSprite(17), 0.25f, 0.25f);
+
+        AnimationState coinFlip = new AnimationState();
+        coinFlip.title = "coinFlip";
+        coinFlip.addFrame(items.getSprite(17), 0.2f);
+        coinFlip.setLoop(false);
+
+        StateMachine stateMachine = new StateMachine();
+        stateMachine.addState(coinFlip);
+        stateMachine.setDefaultState(coinFlip.title);
+        coin.addComponent(stateMachine);
+        coin.addComponent(new QuestionBlock());
+        coin.addComponent(new BlockCoin());
+
+        return coin;
     }
 }
