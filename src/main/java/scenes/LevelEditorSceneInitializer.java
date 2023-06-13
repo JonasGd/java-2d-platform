@@ -172,6 +172,7 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                 for (int i = 0; i < spritesTiles.size(); i++) {
                     if (i < 1) continue;
                     if (i >= 6 && i < 58) continue;
+                    if (i >= 58 && i < 61) continue;
                     if (i >= 64 && i < 84) continue;
                     if (i >= 96 && i < 102) continue;
                     if (i >= 105 && i < 125) continue;
@@ -241,6 +242,30 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                     levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
                 }
                 ImGui.popID();
+                ImGui.sameLine();
+
+                sprite = spritesTiles.getSprite(60);
+                id = sprite.getTexId();
+                texCoords = sprite.getTexCoords();
+                ImGui.pushID(uid++);
+                if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
+                    GameObject object = Prefabs.generateDoor(Direction.Up);
+                    levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
+                }
+                ImGui.popID();
+                ImGui.sameLine();
+                sprite = spritesTiles.getSprite(61);
+                id = sprite.getTexId();
+                texCoords = sprite.getTexCoords();
+                ImGui.pushID(uid++);
+                if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
+                    GameObject object = Prefabs.generateSpriteObject(sprite, 0.25f, 0.25f);
+                    levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
+                }
+                ImGui.popID();
+                ImGui.sameLine();
+
+
                 ImGui.endTabItem();
             }
             if(ImGui.beginTabItem("Sounds")) {

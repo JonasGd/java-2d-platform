@@ -351,4 +351,24 @@ public class Prefabs {
 
         return flower;
     }
+
+    public static GameObject generateDoor(Direction direction) {
+        Spritesheet tiles = AssetPool.getSpritesheet("assets/images/spritesheets/tiles_spritesheet.png");
+        int index = direction == Direction.Up ? 60: -1;
+        assert index != -1 : "Invalid pipe direction";
+        GameObject door = generateSpriteObject(tiles.getSprite(index), 0.25f, 0.25f);
+
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Static);
+        rb.setSensor(true);
+        rb.setFixedRotation(true);
+        rb.setContinuousCollision(false);
+        door.addComponent(rb);
+
+        Box2DCollider b2d = new Box2DCollider();
+        b2d.setHalfSize(new Vector2f(0.3f, 0.3f));
+        door.addComponent(b2d);
+        door.addComponent(new Door(direction));
+        return door;
+    }
 }
