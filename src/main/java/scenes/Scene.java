@@ -99,6 +99,14 @@ public class Scene {
                 i--;
             }
         }
+
+        for (GameObject go : pendingObjects) {
+            gameObjects.add(go);
+            go.start();
+            this.renderer.add(go);
+            this.physics2D.add(go);
+        }
+        pendingObjects.clear();
     }
 
     public void update(float dt) {

@@ -279,6 +279,43 @@ public class Prefabs {
         return coin;
     }
 
+    public static GameObject generateGoomba() {
+        Spritesheet enemySprites = AssetPool.getSpritesheet("assets/images/spritesheets/enemies_spritesheet.png");
+        GameObject goomba = generateSpriteObject(enemySprites.getSprite(12), 0.25f, 0.25f);
+
+        AnimationState walk = new AnimationState();
+        walk.title = "Walk";
+        float defaultFrameTime = 0.23f;
+        walk.addFrame(enemySprites.getSprite(12), defaultFrameTime);
+        walk.addFrame(enemySprites.getSprite(13), defaultFrameTime);
+        walk.setLoop(true);
+
+        AnimationState squashed = new AnimationState();
+        squashed.title = "Squashed";
+        squashed.addFrame(enemySprites.getSprite(11), 0.1f);
+        squashed.setLoop(false);
+
+        StateMachine stateMachine = new StateMachine();
+        stateMachine.addState(walk);
+        stateMachine.addState(squashed);
+        stateMachine.setDefaultState(walk.title);
+        stateMachine.addState(walk.title, squashed.title, "squashMe");
+        goomba.addComponent(stateMachine);
+
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Dynamic);
+        rb.setMass(0.1f);
+        rb.setFixedRotation(true);
+        goomba.addComponent(rb);
+        CircleCollider circle = new CircleCollider();
+        circle.setRadius(0.12f);
+        goomba.addComponent(circle);
+
+        goomba.addComponent(new GoombaAI());
+
+        return goomba;
+    }
+
     public static GameObject generateMushroom() {
         Spritesheet items = AssetPool.getSpritesheet("assets/images/spritesheets/items_spritesheet.png");
         GameObject mushroom = generateSpriteObject(items.getSprite(41), 0.25f, 0.25f);

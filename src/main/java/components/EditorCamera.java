@@ -17,7 +17,7 @@ public class EditorCamera extends Component{
     private boolean reset = false;
 
     private float lerpTime = 0.0f;
-    private float dragSensitivity = 30.0f;
+    private float dragSensitivity = 1.0f;
     private float scrollSensitivity = 0.1f;
 
 
