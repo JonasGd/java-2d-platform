@@ -78,6 +78,15 @@ public class Scene {
         }
     }
 
+    public <T extends Component> GameObject getGameObjectWith(Class<T> clazz) {
+        for (GameObject go: gameObjects) {
+            if (go.getComponent(clazz) != null) {
+                return go;
+            }
+        }
+        return null;
+    }
+
     public GameObject getGameObject(int gameObjectId) {
         Optional<GameObject> result = this.gameObjects.stream()
                 .filter(gameObject -> gameObject.getUid() == gameObjectId)

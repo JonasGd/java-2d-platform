@@ -14,6 +14,7 @@ import physics2D.components.RigidBody2D;
 import physics2D.enums.BodyType;
 import renderer.DebugDraw;
 import scenes.LevelEditorSceneInitializer;
+import scenes.LevelSceneInitializer;
 import util.AssetPool;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -77,7 +78,7 @@ public class PlayerController extends Component {
                 this.rb.setVelocity(this.velocity);
                 this.rb.setAngularVelocity(0);
             } else if (!deadGoingUp && gameObject.transform.position.y <= deadMinHeight) {
-                Window.changeScene(new LevelEditorSceneInitializer());
+                Window.changeScene(new LevelSceneInitializer());
             }
             return;
         }
@@ -265,6 +266,10 @@ public class PlayerController extends Component {
             hurtInvincibilityTimeLeft = hurtInvincibilityTime;
             AssetPool.getSound("assets/sounds/pipe.ogg").play();
         }
+    }
+
+    public boolean hasWon() {
+        return false;
     }
 
     public boolean isSmall() {
