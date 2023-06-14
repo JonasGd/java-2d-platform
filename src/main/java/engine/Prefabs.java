@@ -408,4 +408,60 @@ public class Prefabs {
         door.addComponent(new Door(direction));
         return door;
     }
+
+    public static GameObject generateFlagtop() {
+        Spritesheet items = AssetPool.getSpritesheet("assets/images/spritesheets/items_spritesheet.png");
+        GameObject flagtop = generateSpriteObject(items.getSprite(20), 0.25f, 0.25f);
+
+        AnimationState walk = new AnimationState();
+        walk.title = "Move";
+        float defaultFrameTime = 0.23f;
+        walk.addFrame(items.getSprite(20), defaultFrameTime);
+        walk.addFrame(items.getSprite(21), defaultFrameTime);
+        walk.setLoop(true);
+
+        AnimationState win = new AnimationState();
+        win.title = "Win";
+        win.addFrame(items.getSprite(22), 0.1f);
+        win.setLoop(false);
+
+        StateMachine stateMachine = new StateMachine();
+        stateMachine.addState(walk);
+        stateMachine.addState(win);
+        stateMachine.setDefaultState(walk.title);
+        stateMachine.addState(walk.title, win.title, "win");
+        flagtop.addComponent(stateMachine);
+
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Dynamic);
+        rb.setFixedRotation(true);
+        rb.setContinuousCollision(false);
+        flagtop.addComponent(rb);
+
+        Box2DCollider boxCollider = new Box2DCollider();
+        boxCollider.setHalfSize(new Vector2f(0.1f, 0.25f));
+        boxCollider.setOffset(new Vector2f(-0.075f, 0.0f));
+        flagtop.addComponent(boxCollider);
+        flagtop.addComponent(new Flagpole(true));
+
+        return flagtop;
+    }
+
+    public static GameObject generateFlagPole() {
+        Spritesheet items = AssetPool.getSpritesheet("assets/images/spritesheets/items_spritesheet.png");
+        GameObject flagtop = generateSpriteObject(items.getSprite(12), 0.25f, 0.25f);
+
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Dynamic);
+        rb.setFixedRotation(true);
+        rb.setContinuousCollision(false);
+        flagtop.addComponent(rb);
+
+        Box2DCollider boxCollider = new Box2DCollider();
+        boxCollider.setHalfSize(new Vector2f(0.1f, 0.25f));
+        flagtop.addComponent(boxCollider);
+        flagtop.addComponent(new Flagpole(false));
+
+        return flagtop;
+    }
 }
