@@ -39,7 +39,7 @@ public class Door extends Component{
                     break;
             }
             if (playerEntering) {
-                if ((KeyListener.keyBeginPress(GLFW_KEY_DOWN) || KeyListener.keyBeginPress(GLFW_KEY_S)) && isEntrance) {
+                if ((KeyListener.keyBeginPress(GLFW_KEY_DOWN) || KeyListener.keyBeginPress(GLFW_KEY_S)) && isEntrance /*&& playerAtEntrance()*/) {
                     collindingPlayer.setPosition(getPlayerPosition(connectingPipe));
                     AssetPool.getSound("assets/sounds/pipe.ogg").play();
                 }
@@ -47,18 +47,28 @@ public class Door extends Component{
         }
     }
 
+    public boolean playerAtEntrance() {
+        if (collindingPlayer == null) {
+            return false;
+        }
+
+        Vector2f min = new Vector2f(gameObject.transform.position).sub(new Vector2f(gameObject.transform.scale).mul(0.5f));
+        Vector2f max = new Vector2f(gameObject.transform.position).add(new Vector2f(gameObject.transform.scale).mul(0.5f));
+        Vector2f playerMin = new Vector2f(collindingPlayer.gameObject.transform.position).sub(new Vector2f(collindingPlayer.gameObject.transform.scale).mul(0.5f));
+        Vector2f playerMax = new Vector2f(collindingPlayer.gameObject.transform.position).add(new Vector2f(collindingPlayer.gameObject.transform.scale).mul(0.5f));
+
+        switch (direction) {
+            case Up:
+                return playerMin.y >= max.y && playerMax.x > min.x && playerMin.x < max.x;
+        }
+
+        return false;
+    }
+
     @Override
     public void beginCollision(GameObject collidingObject, Contact contact, Vector2f contactNormal) {
         PlayerController playerController = collidingObject.getComponent(PlayerController.class);
         if (playerController != null) {
-//            switch (direction) {
-//                case Up:
-//                    if (contactNormal.y < entranceVectorTolerance) {
-//                        return;
-//                    }
-//                    break;
-//            }
-            System.out.println("colliding with a door");
             collindingPlayer = playerController;
         }
     }
