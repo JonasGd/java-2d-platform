@@ -34,9 +34,16 @@ public class MushroomAI extends Component{
         if (playerController != null) {
             contact.setEnabled(false);
             if (!hitPlayer) {
-                playerController.powerup();
+                if (playerController.isSmall()) {
+                    playerController.powerup();
+                } else {
+                    AssetPool.getSound("assets/sounds/coin.ogg").play();
+                }
                 this.gameObject.destroy();
                 hitPlayer = true;
+            } else if (obj.getComponent(Ground.class) == null) {
+                contact.setEnabled(false);
+                return;
             }
         }
         if (Math.abs(contactNormal.y) < 0.1f) {

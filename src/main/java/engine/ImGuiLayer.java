@@ -15,6 +15,8 @@ import lombok.Getter;
 import renderer.PickingTexture;
 import scenes.Scene;
 
+import java.io.File;
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER;
@@ -100,7 +102,7 @@ public class ImGuiLayer {
                 ImGui.setWindowFocus(null);
             }
 
-            if(!io.getWantCaptureMouse() || gameViewWindow.getWantCaptureMouse()) {
+            if(gameViewWindow.getWantCaptureMouse()) {
                 MouseListener.mouseButtonCallback(w, button, action, mods);
             }
         });
@@ -138,18 +140,31 @@ public class ImGuiLayer {
         // Fonts configuration
         // read: https://raw.githubusercontent.com/ocornut/imgui/master/docs/Fonts.txt
 
-        final ImFontAtlas fontAtlas = io.getFonts();
-        final ImFontConfig fontConfig = new ImFontConfig(); //natively allocated object, should be explicitly destroyed
+        if (new File("C:/Windows/Fonts/segoeui.ttf").isFile()) {
+            final ImFontAtlas fontAtlas = io.getFonts();
+            final ImFontConfig fontConfig = new ImFontConfig(); //natively allocated object, should be explicitly destroyed
 
-        //Glyphs could be added per-font as well as per config used globally like here
-        fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+            //Glyphs could be added per-font as well as per config used globally like here
+            fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
 
-        //Fonts merge example
-        fontConfig.setPixelSnapH(true);
-        fontAtlas.addFontFromFileTTF("assets/fonts/segoeui.ttf", 22, fontConfig);
+            //Fonts merge example
+            fontConfig.setPixelSnapH(true);
+            fontAtlas.addFontFromFileTTF("C:/Windows/Fonts/segoeui.ttf", 22, fontConfig);
+            fontConfig.destroy(); // After all fonts were added we don't need this config more
+        } else if (new File("C:/Windows/Fonts/Cour.ttf").isFile()) {
+            // Fallback font
 
+            final ImFontAtlas fontAtlas = io.getFonts();
+            final ImFontConfig fontConfig = new ImFontConfig(); // Natively allocated object, should be explicitly destroyed
 
-        fontConfig.destroy(); // After all fonts were added we don't need this config anymore
+            // Glyphs could be added per-font as well as per config used globally like here
+            fontConfig.setGlyphRanges(fontAtlas.getGlyphRangesDefault());
+
+            // Fonts merge example
+            fontConfig.setPixelSnapH(true);
+            fontAtlas.addFontFromFileTTF("C:/Windows/Fonts/Cour.ttf", 22, fontConfig);
+            fontConfig.destroy(); // After all fonts were added we don't need this config anymore
+        }
 
         //-----------------------------------------------------------
         //Use freetype instead of stb truetype to build a fonts texture

@@ -7,6 +7,7 @@ import physics2D.components.CircleCollider;
 import physics2D.components.PillboxCollider;
 import physics2D.components.RigidBody2D;
 import physics2D.enums.BodyType;
+import physics2Dtut.rigidbody.Rigidbody2D;
 import util.AssetPool;
 
 public class Prefabs {
@@ -212,8 +213,11 @@ public class Prefabs {
         jumper.addComponent(stateMachine);
 
         PillboxCollider pb = new PillboxCollider();
-        pb.width = 0.39f;
-        pb.height = 0.31f;
+        pb.width = 0.21f;
+        pb.height = 0.25f;
+        //pb.width = -0.17
+        //pb.height = -0.25
+        jumper.addComponent(pb);
         RigidBody2D rb = new RigidBody2D();
         rb.setBodyType(BodyType.Dynamic);
         rb.setContinuousCollision(false);
@@ -221,9 +225,9 @@ public class Prefabs {
         rb.setMass(25.0f);
 
         jumper.addComponent(rb);
-        jumper.addComponent(pb);
         jumper.addComponent(new PlayerController());
 
+        jumper.transform.zIndex = 10;
         return jumper;
     }
 
@@ -482,6 +486,32 @@ public class Prefabs {
         fireball.addComponent(new Fireball());
 
         return fireball;
+    }
+
+    public static GameObject generateCoin() {
+        Spritesheet items = AssetPool.getSpritesheet("assets/images/spritesheets/items_spritesheet.png");
+        GameObject coin = generateSpriteObject(items.getSprite(17), 0.25f, 0.25f);
+
+        AnimationState coinFlip = new AnimationState();
+        coinFlip.title = "CoinFlip";
+        float defaultFrameTime = 0.23f;
+        coinFlip.addFrame(items.getSprite(7), defaultFrameTime);
+        coinFlip.setLoop(false);
+
+        StateMachine stateMachine = new StateMachine();
+        stateMachine.addState(coinFlip);
+        stateMachine.setDefaultState(coinFlip.title);
+        coin.addComponent(stateMachine);
+        coin.addComponent(new Coin());
+
+        CircleCollider circleCollider = new CircleCollider();
+        circleCollider.setRadius(0.12f);
+        coin.addComponent(circleCollider);
+        RigidBody2D rb = new RigidBody2D();
+        rb.setBodyType(BodyType.Static);
+        coin.addComponent(rb);
+
+        return coin;
     }
 
 }

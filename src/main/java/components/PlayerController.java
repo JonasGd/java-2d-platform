@@ -102,7 +102,7 @@ public class PlayerController extends Component {
 
         if (isDead) {
             if (this.gameObject.transform.position.y < deadMaxHeight && deadGoingUp) {
-                this.gameObject.transform.position.y += dt * walkSpeed * 2.0f;
+                this.gameObject.transform.position.y += dt * walkSpeed / 2.0f;
             } else if (this.gameObject.transform.position.y >= deadMaxHeight && deadGoingUp) {
                 deadGoingUp = false;
             } else if (!deadGoingUp && gameObject.transform.position.y > deadMinHeight) {
@@ -189,7 +189,7 @@ public class PlayerController extends Component {
             groundDebounce = 0;
         } else if (enemyBounce > 0) {
             enemyBounce --;
-            this.velocity.y = ((jumpTime /2.2f) * jumpBoost);
+            this.velocity.y = ((enemyBounce /2.2f) * jumpBoost);
         }else if (!onGround) {
             if (this.jumpTime > 0){
                 this.velocity.y *= 0.35f;
@@ -239,7 +239,7 @@ public class PlayerController extends Component {
             if (pb != null) {
                 jumpBoost *= bigJumpBoostFactor;
                 walkSpeed *= bigJumpBoostFactor;
-                //pb.setHeight(0.63f);
+                //pb.setHeight(0.42f);
             }
         } else if (playerState == PlayerState.Big) {
             playerState = PlayerState.Fire;
@@ -258,6 +258,7 @@ public class PlayerController extends Component {
             rb.setBodyType(BodyType.Static);
             gameObject.transform.position.x = flagpole.transform.position.x;
             stateMachine.trigger("win");
+            AssetPool.getSound("assets/sounds/main-theme.ogg").stop();
             AssetPool.getSound("assets/sounds/flagpole.ogg").play();
         }
     }
@@ -300,6 +301,7 @@ public class PlayerController extends Component {
             this.rb.setVelocity(new Vector2f());
             this.isDead = true;
             this.rb.setIsSensor();
+            AssetPool.getSound("assets/sounds/main-theme.ogg").stop();
             AssetPool.getSound("assets/sounds/death.ogg").play();
             deadMaxHeight = this.gameObject.transform.position.y + 0.3f;
             this.rb.setBodyType(BodyType.Static);
@@ -313,7 +315,7 @@ public class PlayerController extends Component {
             if (pb != null) {
                 jumpBoost /= bigJumpBoostFactor;
                 walkSpeed /= bigJumpBoostFactor;
-                //pb.setHeight(0.31f);
+                //pb.setHeight(0.25f);
             }
             hurtInvincibilityTimeLeft = hurtInvincibilityTime;
             AssetPool.getSound("assets/sounds/pipe.ogg").play();

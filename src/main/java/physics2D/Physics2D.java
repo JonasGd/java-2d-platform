@@ -15,10 +15,12 @@ import org.jbox2d.dynamics.Fixture;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import physics2D.components.Box2DCollider;
 import physics2D.components.CircleCollider;
 import physics2D.components.PillboxCollider;
 import physics2D.components.RigidBody2D;
+import renderer.DebugDraw;
 
 public class Physics2D {
     private Vec2 gravity = new Vec2(0,-10.0f);
@@ -200,7 +202,6 @@ public class Physics2D {
         assert body != null: "Raw body must not be null";
 
         addBox2DCollider(rb, pb.getBox());
-        addCircleCollider(rb, pb.getTopCircle());
         addCircleCollider(rb, pb.getBottomCircle());
     }
 

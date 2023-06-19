@@ -83,6 +83,9 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
         AssetPool.addSound("assets/sounds/powerup_appears.ogg", false);
         AssetPool.addSound("assets/sounds/stage_clear.ogg", false);
 
+        AssetPool.getSound("assets/sounds/main-theme.ogg").stop();
+
+
         for (GameObject g : scene.getGameObjects()) {
             if (g.getComponent(SpriteRenderer.class)!= null) {
                 SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
@@ -297,6 +300,18 @@ public class LevelEditorSceneInitializer extends SceneInitializer {
                     levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
                 }
                 ImGui.popID();
+                ImGui.sameLine();
+
+                sprite = items.getSprite(17);
+                id = sprite.getTexId();
+                texCoords = sprite.getTexCoords();
+                ImGui.pushID(uid++);
+                if (ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y)) {
+                    GameObject object = Prefabs.generateCoin();
+                    levelEditorStuff.getComponent(MouseControls.class).pickupObject(object);
+                }
+                ImGui.popID();
+                ImGui.sameLine();
 
                 ImGui.endTabItem();
             }

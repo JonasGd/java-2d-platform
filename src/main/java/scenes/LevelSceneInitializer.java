@@ -76,6 +76,9 @@ public class LevelSceneInitializer extends SceneInitializer {
         AssetPool.addSound("assets/sounds/powerup_appears.ogg", false);
         AssetPool.addSound("assets/sounds/stage_clear.ogg", false);
 
+        AssetPool.getSound("assets/sounds/main-theme.ogg").play();
+
+
         for (GameObject g : scene.getGameObjects()) {
             if (g.getComponent(SpriteRenderer.class)!= null) {
                 SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
